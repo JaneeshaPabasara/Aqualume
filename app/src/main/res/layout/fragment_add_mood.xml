@@ -16,9 +16,9 @@
             android:id="@+id/iv_back"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_back"
-            android:padding="4dp"
             android:contentDescription="Back"
+            android:padding="4dp"
+            android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,11 +26,11 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="How do you feel today?"
-            android:textSize="20sp"
-            android:textColor="@color/primary_text"
-            android:fontFamily="sans-serif-bold"
             android:layout_marginTop="40dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/how_do_you_feel_today"
+            android:textColor="@color/primary_text"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_back" />
 
@@ -39,8 +39,8 @@
             android:id="@+id/mood_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="24dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title">
@@ -56,33 +56,33 @@
                     android:id="@+id/card_happy"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:layout_weight="1"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="2dp"
                     app:strokeColor="@color/card_stroke"
-                    app:cardBackgroundColor="@color/white">
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="😊"
+                            android:src="@drawable/hapimg"
                             android:textSize="32sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="Happy"
-                            android:textSize="11sp"
                             android:textColor="@color/primary_text"
-                            android:layout_marginTop="4dp" />
+                            android:textSize="11sp" />
 
                     </LinearLayout>
 
@@ -92,33 +92,33 @@
                     android:id="@+id/card_sad"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:layout_weight="1"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="2dp"
                     app:strokeColor="@color/card_stroke"
-                    app:cardBackgroundColor="@color/white">
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="😢"
+                            android:src="@drawable/sadimg"
                             android:textSize="32sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="Sad"
-                            android:textSize="11sp"
                             android:textColor="@color/primary_text"
-                            android:layout_marginTop="4dp" />
+                            android:textSize="11sp" />
 
                     </LinearLayout>
 
@@ -128,33 +128,34 @@
                     android:id="@+id/card_angry"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:layout_weight="1"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="2dp"
                     app:strokeColor="@color/card_stroke"
-                    app:cardBackgroundColor="@color/white">
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="😠"
+                            android:layout_marginTop="-5px"
+                            android:src="@drawable/angimg"
                             android:textSize="32sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="Angry"
-                            android:textSize="11sp"
                             android:textColor="@color/primary_text"
-                            android:layout_marginTop="4dp" />
+                            android:textSize="11sp" />
 
                     </LinearLayout>
 
@@ -164,33 +165,33 @@
                     android:id="@+id/card_calm"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:layout_weight="1"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="2dp"
                     app:strokeColor="@color/card_stroke"
-                    app:cardBackgroundColor="@color/white">
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="😌"
+                            android:src="@drawable/calmimg"
                             android:textSize="32sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="Calm"
-                            android:textSize="11sp"
                             android:textColor="@color/primary_text"
-                            android:layout_marginTop="4dp" />
+                            android:textSize="11sp" />
 
                     </LinearLayout>
 
@@ -209,33 +210,34 @@
                     android:id="@+id/card_neutral"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:layout_weight="1"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="2dp"
                     app:strokeColor="@color/card_stroke"
-                    app:cardBackgroundColor="@color/white">
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="😐"
+                            android:layout_marginTop="5px"
+                            android:src="@drawable/neimg"
                             android:textSize="32sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="Neutral"
-                            android:textSize="11sp"
                             android:textColor="@color/primary_text"
-                            android:layout_marginTop="4dp" />
+                            android:textSize="11sp" />
 
                     </LinearLayout>
 
@@ -245,33 +247,33 @@
                     android:id="@+id/card_energetic"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:layout_weight="1"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="2dp"
                     app:strokeColor="@color/card_stroke"
-                    app:cardBackgroundColor="@color/white">
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="😄"
+                            android:src="@drawable/eneimg"
                             android:textSize="32sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="Energetic"
-                            android:textSize="11sp"
                             android:textColor="@color/primary_text"
-                            android:layout_marginTop="4dp" />
+                            android:textSize="11sp" />
 
                     </LinearLayout>
 
@@ -281,33 +283,33 @@
                     android:id="@+id/card_tired"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:layout_weight="1"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="2dp"
                     app:strokeColor="@color/card_stroke"
-                    app:cardBackgroundColor="@color/white">
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="😫"
+                            android:src="@drawable/tiredimg"
                             android:textSize="32sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tired"
-                            android:textSize="11sp"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/tired"
                             android:textColor="@color/primary_text"
-                            android:layout_marginTop="4dp" />
+                            android:textSize="11sp" />
 
                     </LinearLayout>
 
@@ -317,33 +319,33 @@
                     android:id="@+id/card_stressed"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:layout_weight="1"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="2dp"
                     app:strokeColor="@color/card_stroke"
-                    app:cardBackgroundColor="@color/white">
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="😰"
+                            android:src="@drawable/scaimg"
                             android:textSize="32sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="Stressed"
-                            android:textSize="11sp"
                             android:textColor="@color/primary_text"
-                            android:layout_marginTop="4dp" />
+                            android:textSize="11sp" />
 
                     </LinearLayout>
 
@@ -358,11 +360,11 @@
             android:id="@+id/tv_thoughts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your thoughts"
-            android:textSize="16sp"
-            android:textColor="@color/primary_text"
-            android:fontFamily="sans-serif-medium"
             android:layout_marginTop="24dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/your_thoughts"
+            android:textColor="@color/primary_text"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mood_container" />
 
@@ -371,9 +373,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_thoughts">
@@ -382,14 +384,14 @@
                 android:id="@+id/et_thoughts"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:hint="Write here . . ."
                 android:background="@null"
-                android:padding="16dp"
                 android:gravity="top"
+                android:hint="@string/write_here"
                 android:inputType="textMultiLine"
-                android:textSize="15sp"
+                android:padding="16dp"
                 android:textColor="@color/primary_text"
-                android:textColorHint="@color/secondary_text" />
+                android:textColorHint="@color/secondary_text"
+                android:textSize="15sp" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -398,13 +400,12 @@
             android:id="@+id/btn_add_mood"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:text="Add Mood"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/button_primary"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/add_moodd"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:fontFamily="sans-serif-medium"
-            android:background="@drawable/button_primary"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_thoughts" />

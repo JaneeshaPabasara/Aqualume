@@ -18,8 +18,8 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_meditation"
-            android:contentDescription="Meditation" />
+            android:contentDescription="@string/meditatio"
+            android:src="@drawable/ic_meditation" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -32,7 +32,7 @@
                 android:id="@+id/tv_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="20 min"
+                android:text="@string/_20_min"
                 android:textSize="16sp"
                 android:textColor="@color/primary_text"
                 android:fontFamily="sans-serif-medium" />
@@ -47,7 +47,7 @@
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8.30 AM"
+                    android:text="@string/_8_30_am"
                     android:textSize="13sp"
                     android:textColor="@color/secondary_text" />
 
@@ -55,7 +55,7 @@
                     android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="01/10/2025"
+                    android:text="@string/_01_10_2025vv"
                     android:textSize="13sp"
                     android:textColor="@color/success"
                     android:fontFamily="sans-serif-medium"
@@ -70,18 +70,18 @@
             android:id="@+id/iv_edit"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_edit"
-            android:padding="4dp"
             android:layout_marginEnd="8dp"
-            android:contentDescription="Edit" />
+            android:contentDescription="@string/edite"
+            android:padding="4dp"
+            android:src="@drawable/ic_edit" />
 
         <ImageView
             android:id="@+id/iv_delete"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_delete"
+            android:contentDescription="@string/deletee"
             android:padding="4dp"
-            android:contentDescription="Delete" />
+            android:src="@drawable/ic_delete" />
 
     </LinearLayout>
 

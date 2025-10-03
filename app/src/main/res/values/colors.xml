@@ -28,4 +28,6 @@
     <color name="success">#4ADE80</color>
     <color name="warning">#FBBF24</color>
     <color name="error">#F87171</color>
+    bottom_nav_color
+    <color name="bottom_nav_color">#E5E7EB</color>
 </resources>

@@ -15,9 +15,9 @@
             android:id="@+id/iv_back"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_back"
+            android:src="@drawable/logo"
             android:padding="4dp"
-            android:contentDescription="Back"
+            android:contentDescription="@string/back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,10 +25,11 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lets take a deep breath"
-            android:textSize="20sp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/lets_take_a_deep_breath"
             android:textColor="@color/primary_text"
-            android:fontFamily="sans-serif-bold"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,9 +39,9 @@
             android:id="@+id/iv_meditation"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:src="@drawable/img_meditation_breath"
             android:layout_marginTop="32dp"
-            android:contentDescription="Meditation"
+            android:contentDescription="@string/meditation"
+            android:src="@drawable/img_meditation_breath"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_back" />
@@ -66,7 +67,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Time of the day"
+                    android:text="@string/time_of_the_day"
                     android:textSize="16sp"
                     android:textColor="@color/primary_text"
                     android:fontFamily="sans-serif-medium" />
@@ -104,7 +105,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Time Duration"
+                    android:text="@string/time_duration"
                     android:textSize="16sp"
                     android:textColor="@color/primary_text"
                     android:fontFamily="sans-serif-medium" />
@@ -121,16 +122,16 @@
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:background="@drawable/spinner_background"
+                        android:background="@drawable/spinner_background2"
                         android:padding="12dp" />
 
                     <Spinner
                         android:id="@+id/spinner_unit"
                         android:layout_width="100dp"
                         android:layout_height="48dp"
-                        android:background="@drawable/spinner_background"
-                        android:padding="12dp"
-                        android:layout_marginStart="12dp" />
+                        android:layout_marginStart="12dp"
+                        android:background="@drawable/spinner_background3"
+                        android:padding="12dp" />
 
                 </LinearLayout>
 
@@ -142,14 +143,14 @@
             android:id="@+id/btn_add_time"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:text="Add Time"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_primary"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/add_time"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:fontFamily="sans-serif-medium"
-            android:background="@drawable/button_primary"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_duration" />
 

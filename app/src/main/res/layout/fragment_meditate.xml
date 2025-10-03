@@ -37,11 +37,11 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Meditate"
-            android:textSize="20sp"
-            android:textColor="@color/primary_text"
-            android:fontFamily="sans-serif-bold"
             android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/meditateee"
+            android:textColor="@color/primary_text"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo" />
@@ -50,9 +50,9 @@
             android:id="@+id/iv_meditation"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/img_meditation_large"
             android:layout_marginTop="24dp"
-            android:contentDescription="Meditation"
+            android:contentDescription="@string/meditationnnn"
+            android:src="@drawable/img_meditation_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -78,7 +78,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="set goal for meditate"
+                    android:text="@string/set_goal_for_meditate"
                     android:textSize="16sp"
                     android:textColor="@color/primary_text"
                     android:fontFamily="sans-serif-medium" />
@@ -101,7 +101,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="min"
+                        android:text="@string/min"
                         android:textSize="16sp"
                         android:textColor="@color/primary_text"
                         android:layout_marginStart="12dp" />
@@ -248,16 +248,16 @@
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:background="@drawable/spinner_background"
+                        android:background="@drawable/spinner_background2"
                         android:padding="12dp" />
 
                     <Spinner
                         android:id="@+id/spinner_am_pm"
                         android:layout_width="100dp"
                         android:layout_height="48dp"
-                        android:background="@drawable/spinner_background"
-                        android:padding="12dp"
-                        android:layout_marginStart="12dp" />
+                        android:layout_marginStart="12dp"
+                        android:background="@drawable/spinner_background3"
+                        android:padding="12dp" />
 
                 </LinearLayout>
 

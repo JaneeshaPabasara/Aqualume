@@ -21,10 +21,10 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hydration History"
-        android:textSize="20sp"
+        android:fontFamily="sans-serif"
+        android:text="@string/hydration_historyy"
         android:textColor="@color/primary_text"
-        android:fontFamily="sans-serif-bold"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,9 +35,9 @@
         android:id="@+id/iv_hydration"
         android:layout_width="200dp"
         android:layout_height="180dp"
-        android:src="@drawable/img_hydration_history"
         android:layout_marginTop="24dp"
-        android:contentDescription="Hydration"
+        android:contentDescription="@string/hydration"
+        android:src="@drawable/img_hydration_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_back" />
@@ -58,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="All record log"
+            android:text="@string/all_record_log"
             android:textSize="16sp"
             android:textColor="@color/primary_text"
             android:fontFamily="sans-serif-medium" />
@@ -83,13 +83,13 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ic_filter"
-                    android:contentDescription="Filter" />
+                    android:contentDescription="@string/filter"
+                    android:src="@drawable/ic_filter" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="filter"
+                    android:text="@string/filterr"
                     android:textSize="14sp"
                     android:textColor="@color/primary_text"
                     android:layout_marginStart="4dp" />

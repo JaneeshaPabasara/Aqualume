@@ -38,11 +38,11 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Journal"
-            android:textSize="20sp"
-            android:textColor="@color/primary_text"
-            android:fontFamily="sans-serif-bold"
             android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif"
+            android:text="Journal"
+            android:textColor="@color/primary_text"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo" />
@@ -52,9 +52,9 @@
             android:id="@+id/iv_journal"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/img_journal_large"
             android:layout_marginTop="24dp"
             android:contentDescription="Journal"
+            android:src="@drawable/img_journal_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -128,8 +128,8 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_arrow_right"
-                    android:contentDescription="View" />
+                    android:contentDescription="View"
+                    android:src="@drawable/ic_arrow_right" />
 
             </LinearLayout>
 
@@ -164,10 +164,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Remind me to Write Journal"
-                        android:textSize="15sp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/remind_me_to_write_journal"
                         android:textColor="@color/primary_text"
-                        android:fontFamily="sans-serif-medium" />
+                        android:textSize="15sp" />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_reminder"
@@ -181,7 +181,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Select Time"
+                    android:text="@string/select_time"
                     android:textSize="14sp"
                     android:textColor="@color/primary_text"
                     android:layout_marginTop="16dp" />
@@ -198,16 +198,16 @@
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:background="@drawable/spinner_background"
+                        android:background="@drawable/spinner_background2"
                         android:padding="12dp" />
 
                     <Spinner
                         android:id="@+id/spinner_am_pm"
-                        android:layout_width="100dp"
+                        android:layout_width="93dp"
                         android:layout_height="48dp"
-                        android:background="@drawable/spinner_background"
-                        android:padding="12dp"
-                        android:layout_marginStart="12dp" />
+                        android:layout_marginStart="12dp"
+                        android:background="@drawable/spinner_background3"
+                        android:padding="12dp" />
 
                 </LinearLayout>
 

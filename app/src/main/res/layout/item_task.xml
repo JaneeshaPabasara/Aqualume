@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Drink water - 3 liters"
+            android:text="@string/drink_water_3_liters"
             android:textSize="15sp"
             android:textColor="@color/primary_text" />
 
@@ -28,8 +28,8 @@
             android:id="@+id/iv_check"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:contentDescription="@string/completed"
             android:src="@drawable/ic_check"
-            android:contentDescription="Completed"
             android:visibility="gone" />
 
     </LinearLayout>

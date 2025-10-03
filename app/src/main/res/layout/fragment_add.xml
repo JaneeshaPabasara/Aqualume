@@ -35,184 +35,164 @@
             app:layout_constraintTop_toTopOf="@id/iv_logo" />
 
         <!-- Grid Layout for Cards -->
-        <LinearLayout
-            android:id="@+id/cards_container"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_water"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="180dp"
             android:layout_marginTop="80dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/card_meditation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_logo">
+            app:layout_constraintTop_toBottomOf="@id/iv_logo"
+            app:layout_constraintWidth_percent="0.48">
 
-            <!-- Row 1 -->
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
 
-                <!-- Water Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_water"
-                    android:layout_width="0dp"
-                    android:layout_height="180dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp"
-                    app:cardBackgroundColor="@color/white">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:contentDescription="@string/water_icon"
+                    android:src="@drawable/img_water" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:padding="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/waterr"
+                    android:textColor="@color/primary_text"
+                    android:textSize="16sp" />
 
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:contentDescription="@string/water_icon"
-                            android:src="@drawable/img_water"
-                            android:visibility="visible" />
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/waterr"
-                            android:textSize="16sp"
-                            android:textColor="@color/primary_text"
-                            android:fontFamily="sans-serif-medium"
-                            android:layout_marginTop="12dp" />
+        </com.google.android.material.card.MaterialCardView>
 
-                    </LinearLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_meditation"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="8dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/card_water"
+            app:layout_constraintTop_toTopOf="@id/card_water"
+            app:layout_constraintWidth_percent="0.48">
 
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Meditation Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_meditation"
-                    android:layout_width="0dp"
-                    android:layout_height="180dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp"
-                    app:cardBackgroundColor="@color/white">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:padding="16dp">
-
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/img_meditation"
-                            android:contentDescription="@string/meditate_icon"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/meditatee"
-                            android:textColor="@color/primary_text"
-                            android:textSize="16sp" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-            </GridLayout>
-
-            <!-- Row 2 -->
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
 
-                <!-- Journal Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_journal"
-                    android:layout_width="0dp"
-                    android:layout_height="180dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp"
-                    app:cardBackgroundColor="@color/white">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/img_meditation"
+                    android:contentDescription="@string/meditate_icon"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:padding="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/meditatee"
+                    android:textColor="@color/primary_text"
+                    android:textSize="16sp" />
 
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/img_journal"
-                            android:contentDescription="@string/journal_icon"/>
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/jurnal"
-                            android:textSize="16sp"
-                            android:textColor="@color/primary_text"
-                            android:fontFamily="sans-serif-medium"
-                            android:layout_marginTop="12dp" />
+        </com.google.android.material.card.MaterialCardView>
 
-                    </LinearLayout>
+        <!-- Row 2: Journal and Medicine Cards -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_journal"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/card_medicine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_water"
+            app:layout_constraintWidth_percent="0.48">
 
-                </com.google.android.material.card.MaterialCardView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
 
-                <!-- Medicine Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_medicine"
-                    android:layout_width="0dp"
-                    android:layout_height="180dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp"
-                    app:cardBackgroundColor="@color/white">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/img_journal"
+                    android:contentDescription="@string/journal_icon"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:padding="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/jurnal"
+                    android:textColor="@color/primary_text"
+                    android:textSize="16sp" />
 
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:contentDescription="@string/medicine_icon"
-                            android:src="@drawable/img_medicine" />
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/medi"
-                            android:textSize="16sp"
-                            android:textColor="@color/primary_text"
-                            android:fontFamily="sans-serif-medium"
-                            android:layout_marginTop="12dp" />
+        </com.google.android.material.card.MaterialCardView>
 
-                    </LinearLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_medicine"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="8dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/card_journal"
+            app:layout_constraintTop_toTopOf="@id/card_journal"
+            app:layout_constraintWidth_percent="0.48">
 
-                </com.google.android.material.card.MaterialCardView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
 
-            </GridLayout>
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:contentDescription="@string/medicine_icon"
+                    android:src="@drawable/img_medicine" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/medi"
+                    android:textColor="@color/primary_text"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Tasks Section -->
         <TextView
@@ -220,12 +200,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:fontFamily="sans-serif-bold"
+            android:fontFamily="sans-serif"
             android:text="@string/task"
             android:textColor="@color/primary_text"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cards_container" />
+            app:layout_constraintTop_toBottomOf="@id/card_journal" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_tasks"

@@ -38,9 +38,9 @@
             android:id="@+id/iv_notification"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_notification"
-            android:contentDescription="Notifications"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/notifications"
+            android:src="@drawable/ic_notification"
             app:layout_constraintBottom_toBottomOf="@id/iv_logo"
             app:layout_constraintEnd_toStartOf="@id/iv_settings"
             app:layout_constraintTop_toTopOf="@id/iv_logo" />
@@ -49,8 +49,8 @@
             android:id="@+id/iv_settings"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:contentDescription="@string/settings"
             android:src="@drawable/ic_settings"
-            android:contentDescription="Settings"
             app:layout_constraintBottom_toBottomOf="@id/iv_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_logo" />
@@ -60,11 +60,11 @@
             android:id="@+id/tv_calendar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calendar"
-            android:textSize="24sp"
-            android:textColor="@color/primary_text"
-            android:fontFamily="sans-serif-bold"
             android:layout_marginTop="24dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/calendarr"
+            android:textColor="@color/primary_text"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo" />
@@ -102,16 +102,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Water Consumption"
-                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/water_consumption"
                     android:textColor="@color/primary_text"
-                    android:fontFamily="sans-serif-bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_water_target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Target - 3 liters"
+                    android:text="@string/target_3_liters"
                     android:textSize="14sp"
                     android:textColor="@color/secondary_text"
                     android:layout_marginTop="4dp" />
@@ -138,16 +138,16 @@
                             android:id="@+id/tv_water_percentage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="67%"
-                            android:textSize="28sp"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/_67"
                             android:textColor="@color/water_primary"
-                            android:fontFamily="sans-serif-bold" />
+                            android:textSize="28sp" />
 
                         <TextView
                             android:id="@+id/tv_water_completed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Completed"
+                            android:text="@string/completedd"
                             android:textSize="14sp"
                             android:textColor="@color/secondary_text" />
 
@@ -169,23 +169,25 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="12dp"
-                        android:gravity="center_vertical">
 
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+<!--                        android:background="@drawable/button2"-->
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Update water consumption"
-                            android:textSize="14sp"
-                            android:textColor="@color/primary_text" />
+                            android:text="@string/update_water_consumption"
+                            android:textColor="@color/primary_text"
+
+                            android:textSize="14sp" />
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/ic_add"
-                            android:contentDescription="Add" />
+                            android:contentDescription="@string/addd"
+                            android:src="@drawable/ic_add" />
 
                     </LinearLayout>
 
@@ -217,16 +219,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Meditate Duration"
-                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/meditate_duration"
                     android:textColor="@color/primary_text"
-                    android:fontFamily="sans-serif-bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_meditation_target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Target - 2 hours"
+                    android:text="@string/target_2_hours"
                     android:textSize="14sp"
                     android:textColor="@color/secondary_text"
                     android:layout_marginTop="4dp" />
@@ -253,16 +255,16 @@
                             android:id="@+id/tv_meditation_percentage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="45%"
-                            android:textSize="28sp"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/_45"
                             android:textColor="@color/meditation_primary"
-                            android:fontFamily="sans-serif-bold" />
+                            android:textSize="28sp" />
 
                         <TextView
                             android:id="@+id/tv_meditation_completed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Completed"
+                            android:text="@string/completeddd"
                             android:textSize="14sp"
                             android:textColor="@color/secondary_text" />
 
@@ -333,10 +335,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mood Board"
-                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/mood_board"
                     android:textColor="@color/primary_text"
-                    android:fontFamily="sans-serif-bold" />
+                    android:textSize="18sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -353,7 +355,7 @@
                         android:id="@+id/tv_mood_summary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="You have been\nmostly feeling\ngood"
+                        android:text="@string/you_have_been_nmostly_feeling_ngood"
                         android:textSize="14sp"
                         android:textColor="@color/mood_primary"
                         android:gravity="center"
@@ -384,7 +386,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Update Journal"
+                            android:text="@string/update_journal"
                             android:textSize="14sp"
                             android:textColor="@color/primary_text" />
 
@@ -392,7 +394,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/ic_add"
-                            android:contentDescription="Add" />
+                            android:contentDescription="@string/adddd" />
 
                     </LinearLayout>
 
