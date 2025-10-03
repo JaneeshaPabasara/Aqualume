@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Aqualume App</string>
+    <string name="add">Add</string>
+    <string name="calendar">Calendar</string>
+    <string name="profile">Profile</string>
+    <string name="home">Home</string>
+    <string name="water">Water</string>
+    <string name="stay_hydrated">Stay Hydrated</string>
+    <string name="hydration_history">Hydration History</string>
+    <string name="meditate">Meditate</string>
+    <string name="add_meditation">Add Meditation</string>
+    <string name="meditation_history">Meditation History</string>
+    <string name="journal">Journal</string>
+    <string name="add_mood">Add Mood</string>
+    <string name="mood_history">Mood History</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="_01_10_2025">01/10/2025</string>
+    <string name="_6_30_am">6.30 AM</string>
+    <string name="_250ml">250ml</string>
+    <string name="waterdrop">Water</string>
+    <string name="taskss">Tasks</string>
+    <string name="task">Task</string>
+    <string name="medicine">Medicine</string>
+    <string name="l">Journal</string>
+    <string name="jurnal">Journal</string>
+    <string name="meditatee">Meditate</string>
+    <string name="meditationn">Meditation</string>
+    <string name="waterr">Water</string>
+    <string name="wate">Water</string>
+    <string name="medi">Medicine</string>
+    <string name="water_icon">waterIcon\n</string>
+    <string name="meditate_icon">mediIcon</string>
+    <string name="journal_icon">journalIcon\n</string>
+    <string name="medicine_icon">medicineIcon</string>
 </resources>

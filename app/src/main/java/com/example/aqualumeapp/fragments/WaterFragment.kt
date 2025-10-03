@@ -1,0 +1,136 @@
+package com.example.aqualumeapp.fragments
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.work.Data
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import com.example.aqualumeapp.R
+import com.example.aqualumeapp.databinding.FragmentWaterBinding
+import com.example.aqualumeapp.workers.ReminderWorker
+import com.example.aqualumeapp.utils.PreferencesManager
+import java.util.concurrent.TimeUnit
+
+class WaterFragment : Fragment() {
+
+    private var _binding: FragmentWaterBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var prefsManager: PreferencesManager
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentWaterBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        prefsManager = PreferencesManager(requireContext())
+
+        setupUI()
+        setupClickListeners()
+        loadSettings()
+    }
+
+    private fun setupUI() {
+        // Setup goal spinner
+        val goals = (1..10).map { it }.toTypedArray()
+        val goalAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, goals)
+        goalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerGoal.adapter = goalAdapter
+
+        // Setup duration spinner
+        val durations = (1..12).map { it }.toTypedArray()
+        val durationAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, durations)
+        durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerDuration.adapter = durationAdapter
+
+        // Setup unit spinners
+        val unitAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("liters", "ml"))
+        unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        val timeUnitAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("hrs", "min"))
+        timeUnitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerTimeUnit.adapter = timeUnitAdapter
+    }
+
+    private fun setupClickListeners() {
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.btnViewHistory.setOnClickListener {
+            findNavController().navigate(R.id.action_water_to_hydrationHistory)
+        }
+
+        binding.switchReminder.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                scheduleWaterReminders()
+            } else {
+                cancelWaterReminders()
+            }
+
+            val settings = prefsManager.getUserSettings()
+            prefsManager.saveUserSettings(settings.copy(waterReminderEnabled = isChecked))
+        }
+
+        binding.spinnerGoal.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val goal = (position + 1) * 1000
+                prefsManager.setWaterGoal(goal)
+            }
+
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
+        })
+    }
+
+    private fun loadSettings() {
+        val settings = prefsManager.getUserSettings()
+        val goalInLiters = settings.waterGoal / 1000
+        binding.spinnerGoal.setSelection(goalInLiters - 1)
+        binding.switchReminder.isChecked = settings.waterReminderEnabled
+        binding.spinnerDuration.setSelection(settings.waterReminderInterval - 1)
+    }
+
+    private fun scheduleWaterReminders() {
+        val duration = binding.spinnerDuration.selectedItem.toString().toLong()
+
+        val data = Data.Builder()
+            .putString("type", "water")
+            .build()
+
+        val workRequest = PeriodicWorkRequestBuilder<ReminderWorker>(
+            duration, TimeUnit.HOURS
+        ).setInputData(data).build()
+
+        WorkManager.getInstance(requireContext()).enqueueUniquePeriodicWork(
+            "water_reminder",
+            ExistingPeriodicWorkPolicy.REPLACE,
+            workRequest
+        )
+
+        val settings = prefsManager.getUserSettings()
+        prefsManager.saveUserSettings(settings.copy(
+            waterReminderInterval = duration.toInt()
+        ))
+    }
+
+    private fun cancelWaterReminders() {
+        WorkManager.getInstance(requireContext()).cancelUniqueWork("water_reminder")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
