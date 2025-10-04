@@ -200,15 +200,6 @@
         </com.google.android.material.card.MaterialCardView>
 
         <!-- Tasks Section -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_tasks"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_update_journal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
