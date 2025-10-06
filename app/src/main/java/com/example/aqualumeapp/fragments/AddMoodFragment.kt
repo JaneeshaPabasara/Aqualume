@@ -12,12 +12,15 @@ import com.example.aqualumeapp.models.MoodLog
 import com.example.aqualumeapp.utils.PreferencesManager
 import java.text.SimpleDateFormat
 import java.util.*
+import com.example.aqualumeapp.adapters.MoodLogAdapter
+
 
 class AddMoodFragment : Fragment() {
 
     private var _binding: FragmentAddMoodBinding? = null
     private val binding get() = _binding!!
     private lateinit var prefsManager: PreferencesManager
+    private lateinit var moodAdapter: MoodLogAdapter
     private var selectedMood: String? = null
     private var selectedEmoji: String? = null
     private var editingLogId: String? = null
@@ -35,119 +38,79 @@ class AddMoodFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         prefsManager = PreferencesManager(requireContext())
+        setupMoodSelector()
+        setupSaveButton()
 
         // Check if editing existing log
         arguments?.getString("logId")?.let {
-            editingLogId = it
-            loadExistingLog(it)
+            logId = it
+            loadExistingLog(logId)
         }
 
-        setupClickListeners()
+
     }
 
-    private fun setupClickListeners() {
-        binding.ivBack.setOnClickListener {
-            findNavController().navigateUp()
+    private fun setupMoodSelector() {
+        val moods = listOf(
+            Pair("Energetic", "⚡"),
+            Pair("Happy", "😊"),
+            Pair("Calm", "😌"),
+            Pair("Tired", "😴"),
+            Pair("Stressed", "😰"),
+            Pair("Sad", "😢")
+        )
+        moodAdapter = MoodAdapter(moods) { mood, emoji ->
+            selectedMood = mood
+            selectedEmoji = emoji
         }
 
-        // Mood selection
-        binding.cardHappy.setOnClickListener {
-            selectMood("happy", "😊")
-        }
-
-        binding.cardSad.setOnClickListener {
-            selectMood("sad", "😢")
-        }
-
-        binding.cardAngry.setOnClickListener {
-            selectMood("angry", "😠")
-        }
-
-        binding.cardCalm.setOnClickListener {
-            selectMood("calm", "😌")
-        }
-
-        binding.cardNeutral.setOnClickListener {
-            selectMood("neutral", "😐")
-        }
-
-        binding.cardEnergetic.setOnClickListener {
-            selectMood("energetic", "😄")
-        }
-
-        binding.cardTired.setOnClickListener {
-            selectMood("tired", "😫")
-        }
-
-        binding.cardStressed.setOnClickListener {
-            selectMood("stressed", "😰")
-        }
-
-        binding.btnAddMood.setOnClickListener {
-            addOrUpdateMood()
-        }
+        binding.rvMoodOptions.adapter = moodAdapter
     }
 
-    private fun selectMood(mood: String, emoji: String) {
-        selectedMood = mood
-        selectedEmoji = emoji
-
-        // Reset all card borders
-        binding.cardHappy.strokeWidth = 2
-        binding.cardSad.strokeWidth = 2
-        binding.cardAngry.strokeWidth = 2
-        binding.cardCalm.strokeWidth = 2
-        binding.cardNeutral.strokeWidth = 2
-        binding.cardEnergetic.strokeWidth = 2
-        binding.cardTired.strokeWidth = 2
-        binding.cardStressed.strokeWidth = 2
-
-        // Highlight selected card
-        when (mood) {
-            "happy" -> binding.cardHappy.strokeWidth = 4
-            "sad" -> binding.cardSad.strokeWidth = 4
-            "angry" -> binding.cardAngry.strokeWidth = 4
-            "calm" -> binding.cardCalm.strokeWidth = 4
-            "neutral" -> binding.cardNeutral.strokeWidth = 4
-            "energetic" -> binding.cardEnergetic.strokeWidth = 4
-            "tired" -> binding.cardTired.strokeWidth = 4
-            "stressed" -> binding.cardStressed.strokeWidth = 4
+    private fun setupSaveButton() {
+        binding.btnSaveMood.setOnClickListener {
+            saveMoodLog()
         }
     }
+    private fun saveMoodLog() {
+        val mood = selectedMood
+        val emoji = selectedEmoji
+        val note = binding.etThoughts.text.toString()
 
-    private fun addOrUpdateMood() {
-        if (selectedMood == null || selectedEmoji == null) {
+        if (mood == null || emoji == null) {
             Toast.makeText(requireContext(), "Please select a mood", Toast.LENGTH_SHORT).show()
             return
         }
-
-        val note = binding.etThoughts.text.toString()
-        val timeFormat = SimpleDateFormat("h.mm a", Locale.getDefault())
+        val logId = arguments?.getString("logId")
         val timestamp = System.currentTimeMillis()
-        val timeString = timeFormat.format(Date(timestamp))
+        val timeString = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date(timestamp))
 
-        if (editingLogId != null) {
-            val updatedLog = MoodLog(
-                id = editingLogId!!,
-                mood = selectedMood!!,
-                emoji = selectedEmoji!!,
-                note = note,
-                timestamp = timestamp,
-                timeString = timeString
-            )
-            prefsManager.updateMoodLog(updatedLog)
-            Toast.makeText(requireContext(), "Mood updated!", Toast.LENGTH_SHORT).show()
+        if (logId != null) {
+            // Update existing mood log
+            val log = prefsManager.getMoodLogs().find { it.id == logId }
+            log?.let {
+                val updatedLog = it.copy(
+                    mood = mood,
+                    emoji = emoji,
+                    note = note,
+                    timestamp = timestamp,
+                    timeString = timeString
+                )
+                prefsManager.updateMoodLog(updatedLog)
+                Toast.makeText(requireContext(), "Mood updated: $mood", duration = Toast.LENGTH_SHORT).show()
+            }
         } else {
             val moodLog = MoodLog(
                 id = UUID.randomUUID().toString(),
-                mood = selectedMood!!,
-                emoji = selectedEmoji!!,
+                mood = mood,
+                emoji = emoji,
                 note = note,
                 timestamp = timestamp,
                 timeString = timeString
             )
+
             prefsManager.saveMoodLog(moodLog)
-            Toast.makeText(requireContext(), "Mood saved successfully!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Mood saved successfully!", duration = Toast.LENGTH_SHORT).show()
         }
 
         findNavController().navigateUp()
@@ -156,7 +119,8 @@ class AddMoodFragment : Fragment() {
     private fun loadExistingLog(logId: String) {
         val log = prefsManager.getMoodLogs().find { it.id == logId }
         log?.let {
-            selectMood(it.mood, it.emoji)
+            selectedMood = it.mood
+            selectedEmoji = it.emoji
             binding.etThoughts.setText(it.note)
             binding.btnAddMood.text = "Update Mood"
         }
