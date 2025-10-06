@@ -1,9 +1,8 @@
 package com.example.aqualumeapp.models
 
 
-    data class WaterLog(
-        val id: String,
-        val amount: Int,
-        val timestamp: Long,
-        val timeString: String
-    )
+data class WaterLog(
+    val id: Long = System.currentTimeMillis(),
+    val amount: Int, // in ml
+    val timestamp: Long = System.currentTimeMillis()
+)

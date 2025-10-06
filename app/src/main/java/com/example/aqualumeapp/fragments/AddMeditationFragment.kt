@@ -110,7 +110,7 @@ class AddMeditationFragment : Fragment() {
         findNavController().navigateUp()
     }
 
-    private fun loadExistingLog(logId: String) {
+    private fun loadExistingLog(logId: Long) {
         val log = prefsManager.getMeditationLogs().find { it.id == logId }
         log?.let {
             val index = (it.duration / 5) - 1

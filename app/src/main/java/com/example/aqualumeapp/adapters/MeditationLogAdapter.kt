@@ -57,10 +57,13 @@ class MeditationLogAdapter(
         }
     }
 
+
     class MeditationLogDiffCallback : DiffUtil.ItemCallback<MeditationLog>() {
+
         override fun areItemsTheSame(oldItem: MeditationLog, newItem: MeditationLog): Boolean {
             return oldItem.id == newItem.id
         }
+
 
         override fun areContentsTheSame(oldItem: MeditationLog, newItem: MeditationLog): Boolean {
             return oldItem == newItem

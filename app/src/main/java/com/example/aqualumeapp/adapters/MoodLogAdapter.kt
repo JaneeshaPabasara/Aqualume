@@ -58,7 +58,7 @@ class MoodLogAdapter(
         }
     }
 
-    class MoodLogDiffCallback : DiffUtil.ItemCallback<MoodLog>() {
+    class MoodLogDiffCalback : DiffUtil.ItemCallback<MoodLog>() {
         override fun areItemsTheSame(oldItem: MoodLog, newItem: MoodLog): Boolean {
             return oldItem.id == newItem.id
         }

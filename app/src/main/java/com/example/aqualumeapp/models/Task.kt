@@ -1,11 +1,8 @@
 package com.example.aqualumeapp.models
 
 data class Task(
-    val id: String,
+    val id: Long = System.currentTimeMillis(),
     val title: String,
-    val isCompleted: Boolean,
-    val type: TaskType
+    val isCompleted: Boolean = false,
+    val timestamp: Long = System.currentTimeMillis()
 )
-enum class TaskType {
-    WATER, MEDITATION, JOURNAL, MEDICINE
-}

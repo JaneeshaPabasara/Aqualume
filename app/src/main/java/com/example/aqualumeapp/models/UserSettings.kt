@@ -1,12 +1,9 @@
 package com.example.aqualumeapp.models
 
 data class UserSettings(
-    val waterGoal: Int = 3000,
-    val meditationGoal: Int = 30,
-    val waterReminderEnabled: Boolean = false,
-    val waterReminderInterval: Int = 2,
-    val meditationReminderEnabled: Boolean = false,
-    val meditationReminderTime: String = "09:00 AM",
-    val journalReminderEnabled: Boolean = false,
-    val journalReminderTime: String = "09:00 AM"
+    val waterGoal: Int = 2000, // ml per day
+    val meditationGoal: Int = 20, // minutes per day
+    val waterReminderInterval: Long = 3600000, // 1 hour in milliseconds
+    val meditationReminderEnabled: Boolean = true,
+    val journalReminderEnabled: Boolean = true
 )

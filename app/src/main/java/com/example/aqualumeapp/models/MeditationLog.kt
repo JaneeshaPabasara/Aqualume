@@ -1,8 +1,8 @@
 package com.example.aqualumeapp.models
 
 data class MeditationLog(
-    val id: String,
-    val duration: Int,
-    val timestamp: Long,
-    val timeString: String
+    val id: Long = System.currentTimeMillis(),
+    val duration: Int, // in minutes
+    val timestamp: Long = System.currentTimeMillis(),
+    val isCompleted: Boolean = false
 )
