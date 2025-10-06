@@ -34,7 +34,7 @@
     <string name="journal_icon">journalIcon\n</string>
     <string name="medicine_icon">medicineIcon</string>
     <string name="add_time">Add Time</string>
-    <string name="time_duration">Time Duration</string>
+    <string name="time_duration">%1$d min</string>
     <string name="time_of_the_day">Time of the day</string>
     <string name="meditation">Meditation</string>
     <string name="lets_take_a_deep_breath">Lets take a deep breath</string>

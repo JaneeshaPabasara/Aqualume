@@ -9,6 +9,7 @@ import com.example.aqualumeapp.databinding.ItemMeditationLogBinding
 import com.example.aqualumeapp.models.MeditationLog
 import java.text.SimpleDateFormat
 import java.util.*
+import com.example.aqualumeapp.R
 
 class MeditationLogAdapter(
     private val onEditClick: (MeditationLog) -> Unit,
@@ -33,8 +34,13 @@ class MeditationLogAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(meditationLog: MeditationLog) {
-            binding.tvDuration.text = "${meditationLog.duration} min"
-            binding.tvTime.text = meditationLog.timeString
+            binding.tvDuration.text = binding.root.context.getString(
+                R.string.time_duration,
+                meditationLog.duration
+            )
+            // Format time from timestamp
+            val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+            binding.tvTime.text = timeFormat.format(Date(meditationLog.timestamp))
 
             // Show date if different from today
             val today = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
