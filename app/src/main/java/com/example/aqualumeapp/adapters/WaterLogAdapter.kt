@@ -34,7 +34,8 @@ class WaterLogAdapter(
 
         fun bind(waterLog: WaterLog) {
             binding.tvAmount.text = "${waterLog.amount}ml"
-            binding.tvTime.text = waterLog.timeString
+            val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+            binding.tvTime.text = timeFormat.format(Date(waterLog.timestamp))
 
             // Show date if different from today
             val today = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())

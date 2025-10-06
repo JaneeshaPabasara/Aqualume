@@ -103,4 +103,6 @@
     <string name="_20_min">20 min</string>
     <string name="meditatio">Meditation</string>
     <string name="get_started">Get Started</string>
+    <string name="deleteee">Delete</string>
+    <string name="mood_emoji">mood_emoji</string>
 </resources>

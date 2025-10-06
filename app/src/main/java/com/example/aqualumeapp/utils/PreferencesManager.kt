@@ -97,11 +97,11 @@ class PreferencesManager(context: Context) {
         saveMoodLogs(logs)
     }
 
-    fun updateMoodLog(logId: Long, moodName: String, moodEmoji: String) {
+    fun updateMoodLog(logId: Long, moodName: String, moodEmoji: Int) {
         val logs = getMoodLogs().toMutableList()
         val index = logs.indexOfFirst { it.id == logId }
         if (index != -1) {
-            logs[index] = logs[index].copy(mood = moodName, emoji = moodEmoji)
+            logs[index] = logs[index].copy(mood = moodName, moodDrawable = moodEmoji)
             saveMoodLogs(logs)
         }
     }

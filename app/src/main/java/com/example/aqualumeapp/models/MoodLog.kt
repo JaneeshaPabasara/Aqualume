@@ -3,6 +3,6 @@ package com.example.aqualumeapp.models
 data class MoodLog(
     val id: Long = System.currentTimeMillis(),
     val mood: String, // "Happy", "Sad", "Angry", "Calm", etc.
-    val emoji: String, // emoji character
+    val moodDrawable: Int, // Resource ID for the mood image (e.g., R.drawable.happy)
     val timestamp: Long = System.currentTimeMillis()
 )

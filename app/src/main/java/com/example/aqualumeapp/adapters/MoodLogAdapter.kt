@@ -31,11 +31,11 @@ class MoodLogAdapter(
     inner class MoodLogViewHolder(
         private val binding: ItemMoodLogBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(moodLog: MoodLog) {
-            binding.tvEmoji.text = moodLog.emoji
+            binding.tvEmoji.setImageResource(moodLog.moodDrawable)
             binding.tvMood.text = moodLog.mood.capitalize()
-            binding.tvTime.text = moodLog.timeString
+            val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+            binding.tvTime.text = timeFormat.format(Date(moodLog.timestamp))
 
             // Show date if different from today
             val today = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
@@ -58,7 +58,7 @@ class MoodLogAdapter(
         }
     }
 
-    class MoodLogDiffCalback : DiffUtil.ItemCallback<MoodLog>() {
+    class MoodLogDiffCallback : DiffUtil.ItemCallback<MoodLog>() {
         override fun areItemsTheSame(oldItem: MoodLog, newItem: MoodLog): Boolean {
             return oldItem.id == newItem.id
         }
