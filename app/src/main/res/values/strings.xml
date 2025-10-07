@@ -105,4 +105,11 @@
     <string name="get_started">Get Started</string>
     <string name="deleteee">Delete</string>
     <string name="mood_emoji">mood_emoji</string>
+    <string name="back_button">Back button</string>
+    <string name="meditation_historyy">Meditation History</string>
+    <string name="meditation_illustration">Meditation illustration</string>
+    <string name="filterrrr">filter</string>
+    <string name="mood_illustration">Mood illustration</string>
+    <string name="all_record_logg">All record log</string>
+    <string name="filterrr">filter</string>
 </resources>

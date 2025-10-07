@@ -31,9 +31,17 @@ class MoodLogAdapter(
     inner class MoodLogViewHolder(
         private val binding: ItemMoodLogBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(moodLog: MoodLog) {
+            // Set mood emoji image
             binding.tvEmoji.setImageResource(moodLog.moodDrawable)
-            binding.tvMood.text = moodLog.mood.capitalize()
+
+            // Set mood name with capitalization
+            binding.tvMood.text = moodLog.mood.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+            }
+
+            // Format and set time
             val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
             binding.tvTime.text = timeFormat.format(Date(moodLog.timestamp))
 
@@ -48,10 +56,20 @@ class MoodLogAdapter(
                 binding.tvDate.visibility = android.view.View.GONE
             }
 
+            // Show note if available
+            if (moodLog.note.isNotEmpty()) {
+                binding.tvNote.visibility = android.view.View.VISIBLE
+                binding.tvNote.text = moodLog.note
+            } else {
+                binding.tvNote.visibility = android.view.View.GONE
+            }
+
+            // Edit button click
             binding.ivEdit.setOnClickListener {
                 onEditClick(moodLog)
             }
 
+            // Delete button click
             binding.ivDelete.setOnClickListener {
                 onDeleteClick(moodLog)
             }
