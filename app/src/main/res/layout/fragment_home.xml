@@ -84,13 +84,13 @@
         <!-- Update Buttons -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/btn_update_water"
-            android:layout_width="0dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:strokeWidth="2dp"
-            app:strokeColor="@color/card_stroke"
+            app:strokeColor="@color/button_primary"
             app:cardBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,23 +99,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="16dp"
-                android:gravity="center_vertical">
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Update water consumption"
-                    android:textSize="16sp"
-                    android:textColor="@color/primary_text" />
+                    android:textColor="@color/primary_text"
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_add"
-                    android:contentDescription="Add" />
+                    android:contentDescription="Add"
+                    android:src="@drawable/ic_add" />
 
             </LinearLayout>
 
@@ -123,13 +123,13 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/btn_update_meditation"
-            android:layout_width="0dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:strokeWidth="2dp"
-            app:strokeColor="@color/card_stroke"
+            app:strokeColor="@color/button_primary"
             app:cardBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,13 +162,13 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/btn_update_journal"
-            android:layout_width="0dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:strokeWidth="2dp"
-            app:strokeColor="@color/card_stroke"
+            app:strokeColor="@color/button_primary"
             app:cardBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

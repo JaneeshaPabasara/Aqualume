@@ -34,18 +34,51 @@
             app:layout_constraintStart_toEndOf="@id/iv_logo"
             app:layout_constraintTop_toTopOf="@id/iv_logo" />
 
+        <ImageView
+            android:id="@+id/iv_notification"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/notifications"
+            android:src="@drawable/ic_notification"
+            app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+            app:layout_constraintEnd_toStartOf="@id/iv_settings"
+            app:layout_constraintTop_toTopOf="@id/iv_logo" />
+
+        <ImageView
+            android:id="@+id/iv_settings"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/settings"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_logo" />
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/Back"
+            android:padding="4dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo"
+            app:layout_constraintWidth_percent="0.48" />
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif"
-            android:text="Journal"
+            android:text="@string/Journal"
             android:textColor="@color/primary_text"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+            app:layout_constraintTop_toBottomOf="@id/iv_back" />
+
 
         <!-- Illustration -->
         <ImageView
@@ -53,7 +86,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="24dp"
-            android:contentDescription="Journal"
+            android:contentDescription="@string/journall"
             android:src="@drawable/img_journal_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,6 +100,7 @@
             android:layout_marginTop="32dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
+
             app:cardBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +117,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Update Journal"
+                    android:text="@string/update_journall"
                     android:textSize="15sp"
                     android:textColor="@color/primary_text" />
 
@@ -91,7 +125,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_add"
-                    android:contentDescription="Add" />
+                    android:contentDescription="@string/add2" />
 
             </LinearLayout>
 
@@ -105,6 +139,7 @@
             android:layout_marginTop="16dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
+
             app:cardBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,14 +156,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="View Mood history"
+                    android:text="@string/view_mood_history"
                     android:textSize="15sp"
                     android:textColor="@color/primary_text" />
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:contentDescription="View"
+                    android:contentDescription="@string/View"
                     android:src="@drawable/ic_arrow_right" />
 
             </LinearLayout>
@@ -174,7 +209,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:thumbTint="@color/white"
-                        app:trackTint="@color/mood_primary" />
+                        app:trackTint="@color/water_primary" />
 
                 </LinearLayout>
 
@@ -193,22 +228,25 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center_vertical">
 
+                    <!--                    android:background="@drawable/spinner_background2"-->
+
                     <Spinner
                         android:id="@+id/spinner_hour"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:background="@drawable/spinner_background2"
-                        android:padding="12dp" />
+                        android:padding="12dp"
+                        android:strokeColor="@color/button_primary" />
 
                     <Spinner
                         android:id="@+id/spinner_am_pm"
                         android:layout_width="93dp"
                         android:layout_height="48dp"
                         android:layout_marginStart="12dp"
-                        android:background="@drawable/spinner_background3"
-                        android:padding="12dp" />
+                        app:strokeColor="@color/button_primary"
 
+                        android:padding="12dp" />
+<!--                    android:background="@drawable/spinner_background3"-->
                 </LinearLayout>
 
             </LinearLayout>

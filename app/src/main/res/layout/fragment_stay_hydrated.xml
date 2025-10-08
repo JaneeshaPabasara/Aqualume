@@ -13,39 +13,84 @@
 
         <!-- Header -->
         <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logo"
+            android:contentDescription="@string/app_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="20sp"
+            android:textColor="@color/primary_text"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+            app:layout_constraintStart_toEndOf="@id/iv_logo"
+            app:layout_constraintTop_toTopOf="@id/iv_logo" />
+
+        <ImageView
+            android:id="@+id/iv_notification"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/notifications"
+            android:src="@drawable/ic_notification"
+            app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+            app:layout_constraintEnd_toStartOf="@id/iv_settings"
+            app:layout_constraintTop_toTopOf="@id/iv_logo" />
+
+        <ImageView
+            android:id="@+id/iv_settings"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/settings"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_logo" />
+
+        <ImageView
             android:id="@+id/iv_back"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_back"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/back4"
             android:padding="4dp"
-            android:contentDescription="Back"
+            android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/iv_logo"
+            app:layout_constraintWidth_percent="0.48" />
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif"
-            android:text="Stay Hydrated"
+            android:text="@string/stay_hydratedd"
             android:textColor="@color/primary_text"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_back" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_back" />
 
         <!-- Illustration -->
         <ImageView
             android:id="@+id/iv_hydration"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:contentDescription="@string/stay_hydrateddd"
             android:src="@drawable/img_stay_hydrated"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_back" />
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <!-- Time of Day Card -->
         <com.google.android.material.card.MaterialCardView
@@ -79,9 +124,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/spinner_background"
+                    android:StrokColor="@color/black"
                     android:padding="12dp" />
-
+<!--                android:background="@drawable/spinner_background"-->
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -132,7 +177,7 @@
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:contentDescription="150ml"
+                        android:contentDescription="@string/W150ml"
                         android:src="@drawable/img_glass_150" />
 
                     <TextView
@@ -169,7 +214,7 @@
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:contentDescription="250ml"
+                        android:contentDescription="@string/W_250ml"
                         android:src="@drawable/img_glass_250" />
 
                     <TextView
@@ -206,7 +251,7 @@
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:contentDescription="500ml"
+                        android:contentDescription="@string/w_500ml"
                         android:src="@drawable/img_bottle_500" />
 
                     <TextView
@@ -273,18 +318,20 @@
         <Button
             android:id="@+id/btn_add_water"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:background="@drawable/button_primary"
+
+            android:backgroundTint="@color/button_primary"
             android:fontFamily="sans-serif"
             android:text="@string/add_water"
-            android:textColor="@color/background"
+            android:textColor="@color/black"
             android:textColorLink="@color/button_primary"
             android:textSize="16sp"
             app:icon="@drawable/ic_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_custom" />
+<!--        android:background="@drawable/button_primary"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

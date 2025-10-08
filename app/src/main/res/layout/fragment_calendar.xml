@@ -149,7 +149,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/completedd"
                             android:textSize="14sp"
-                            android:textColor="@color/secondary_text" />
+                            android:textColor="@color/water_primary" />
 
                     </LinearLayout>
 
@@ -163,17 +163,17 @@
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
                     app:strokeWidth="2dp"
-                    app:strokeColor="@color/card_stroke"
+                    app:strokeColor="@color/button_primary"
                     app:cardBackgroundColor="@color/white">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="12dp">
-<!--                        android:background="@drawable/button2"-->
+<!--                        android:background="@drawable/cal_button"-->
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -266,7 +266,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/completeddd"
                             android:textSize="14sp"
-                            android:textColor="@color/secondary_text" />
+                            android:textColor="@color/meditation_primary" />
 
                     </LinearLayout>
 
@@ -280,7 +280,7 @@
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
                     app:strokeWidth="2dp"
-                    app:strokeColor="@color/card_stroke"
+                    app:strokeColor="@color/button_primary"
                     app:cardBackgroundColor="@color/white">
 
                     <LinearLayout
@@ -372,7 +372,7 @@
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
                     app:strokeWidth="2dp"
-                    app:strokeColor="@color/card_stroke"
+                    app:strokeColor="@color/button_primary"
                     app:cardBackgroundColor="@color/white">
 
                     <LinearLayout
