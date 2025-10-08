@@ -140,6 +140,12 @@
                     android:textColor="@color/primary_text"
                     android:layout_marginStart="4dp" />
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/dropdown"
+                    android:src="@drawable/ic_dropdown" />
+
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -153,9 +159,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filter_section" />
+        app:layout_constraintTop_toBottomOf="@id/filter_section"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_water_log"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

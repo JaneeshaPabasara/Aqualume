@@ -1,70 +1,97 @@
-package com.example.aqualumeapp.adapters
+package com.example.aqualumeapp.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aqualumeapp.databinding.ItemWaterLogBinding
+import com.example.aqualumeapp.R
 import com.example.aqualumeapp.models.WaterLog
 import java.text.SimpleDateFormat
 import java.util.*
 
 class WaterLogAdapter(
+    private var waterLogs: List<WaterLog>,
     private val onEditClick: (WaterLog) -> Unit,
     private val onDeleteClick: (WaterLog) -> Unit
-) : ListAdapter<WaterLog, WaterLogAdapter.WaterLogViewHolder>(WaterLogDiffCallback()) {
+) : RecyclerView.Adapter<WaterLogAdapter.WaterLogViewHolder>() {
+
+    private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    private val timeFormat = SimpleDateFormat("h.mm a", Locale.getDefault())
+    private val today = Calendar.getInstance()
+
+    inner class WaterLogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvDateHeader: TextView = itemView.findViewById(R.id.tvDateHeader)
+        val tvAmount: TextView = itemView.findViewById(R.id.tv_amount)
+        val tvTime: TextView = itemView.findViewById(R.id.tv_time)
+        val tvAchievement: TextView = itemView.findViewById(R.id.tvAchievement)
+        val btnEdit: ImageButton = itemView.findViewById(R.id.iv_edit)
+        val btnDelete: ImageButton = itemView.findViewById(R.id.iv_delete)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WaterLogViewHolder {
-        val binding = ItemWaterLogBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-        return WaterLogViewHolder(binding)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_water_log, parent, false)
+        return WaterLogViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: WaterLogViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val waterLog = waterLogs[position]
+
+        // Show date header if this is the first item or date changed from previous item
+        if (position == 0 || !isSameDate(waterLog.timestamp, waterLogs[position - 1].timestamp)) {
+            holder.tvDateHeader.visibility = View.VISIBLE
+
+            // Format date header
+            val logDate = Calendar.getInstance().apply { timeInMillis = waterLog.timestamp }
+            val headerText = when {
+                isSameDate(waterLog.timestamp, today.timeInMillis) -> "Today"
+                isYesterday(waterLog.timestamp) -> "Yesterday"
+                else -> dateFormat.format(Date(waterLog.timestamp))
+            }
+            holder.tvDateHeader.text = headerText
+        } else {
+            holder.tvDateHeader.visibility = View.GONE
+        }
+
+        // Set amount
+        holder.tvAmount.text = "${waterLog.amount}ml"
+
+        // Set time
+        holder.tvTime.text = timeFormat.format(Date(waterLog.timestamp))
+
+        // Show achievement if daily goal completed
+        if (waterLog.isDailyGoalCompleted) {
+            holder.tvAchievement.visibility = View.VISIBLE
+            holder.tvAchievement.text = "${waterLog.dailyTotal / 1000f} liters Completed"
+        } else {
+            holder.tvAchievement.visibility = View.GONE
+        }
+
+        // Set click listeners
+        holder.btnEdit.setOnClickListener { onEditClick(waterLog) }
+        holder.btnDelete.setOnClickListener { onDeleteClick(waterLog) }
     }
 
-    inner class WaterLogViewHolder(
-        private val binding: ItemWaterLogBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    override fun getItemCount(): Int = waterLogs.size
 
-        fun bind(waterLog: WaterLog) {
-            binding.tvAmount.text = "${waterLog.amount}ml"
-            val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-            binding.tvTime.text = timeFormat.format(Date(waterLog.timestamp))
-
-            // Show date if different from today
-            val today = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-            val logDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(waterLog.timestamp))
-
-            if (today != logDate) {
-                binding.tvDate.visibility = android.view.View.VISIBLE
-                binding.tvDate.text = logDate
-            } else {
-                binding.tvDate.visibility = android.view.View.GONE
-            }
-
-            binding.ivEdit.setOnClickListener {
-                onEditClick(waterLog)
-            }
-
-            binding.ivDelete.setOnClickListener {
-                onDeleteClick(waterLog)
-            }
-        }
+    fun updateLogs(newLogs: List<WaterLog>) {
+        waterLogs = newLogs
+        notifyDataSetChanged()
     }
 
-    class WaterLogDiffCallback : DiffUtil.ItemCallback<WaterLog>() {
-        override fun areItemsTheSame(oldItem: WaterLog, newItem: WaterLog): Boolean {
-            return oldItem.id == newItem.id
-        }
+    private fun isSameDate(timestamp1: Long, timestamp2: Long): Boolean {
+        val cal1 = Calendar.getInstance().apply { timeInMillis = timestamp1 }
+        val cal2 = Calendar.getInstance().apply { timeInMillis = timestamp2 }
+        return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
+                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR)
+    }
 
-        override fun areContentsTheSame(oldItem: WaterLog, newItem: WaterLog): Boolean {
-            return oldItem == newItem
+    private fun isYesterday(timestamp: Long): Boolean {
+        val yesterday = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -1)
         }
+        return isSameDate(timestamp, yesterday.timeInMillis)
     }
 }
