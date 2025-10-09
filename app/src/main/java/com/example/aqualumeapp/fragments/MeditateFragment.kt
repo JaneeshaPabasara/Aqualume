@@ -137,6 +137,7 @@ class MeditateFragment : Fragment() {
             ExistingWorkPolicy.REPLACE,
             workRequest
         )
+        
     }
 
     private fun cancelMeditationReminder() {

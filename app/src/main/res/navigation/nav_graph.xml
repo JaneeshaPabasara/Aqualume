@@ -6,23 +6,8 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.aqualumeapp.fragments.HomeFragment"
-        android:label="@string/home">
-        <action
-            android:id="@+id/action_home_to_stayHydrated"
-            app:destination="@id/stayHydratedFragment" />
-        <action
-            android:id="@+id/action_home_to_addMeditation"
-            app:destination="@id/addMeditationFragment" />
-        <action
-            android:id="@+id/action_home_to_addMood"
-            app:destination="@id/addMoodFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/addFragment"
         android:name="com.example.aqualumeapp.fragments.AddFragment"
-        android:label="@string/add">
+        android:label="@string/home">
         <action
             android:id="@+id/action_add_to_water"
             app:destination="@id/waterFragment" />
@@ -32,6 +17,21 @@
         <action
             android:id="@+id/action_add_to_journal"
             app:destination="@id/journalFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.example.aqualumeapp.fragments.HomeFragment"
+        android:label="@string/add">
+        <action
+            android:id="@+id/action_home_to_stayHydrated"
+            app:destination="@id/stayHydratedFragment" />
+        <action
+            android:id="@+id/action_home_to_addMeditation"
+            app:destination="@id/addMeditationFragment" />
+        <action
+            android:id="@+id/action_home_to_addMood"
+            app:destination="@id/addMoodFragment" />
     </fragment>
 
     <fragment

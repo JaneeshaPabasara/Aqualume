@@ -294,6 +294,21 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+        <Button
+            android:id="@+id/btn_add_meditate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+
+            android:backgroundTint="@color/button_primary"
+            android:fontFamily="sans-serif"
+            android:text="@string/save"
+            android:textColor="@color/black"
+            android:textColorLink="@color/button_primary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_reminder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
