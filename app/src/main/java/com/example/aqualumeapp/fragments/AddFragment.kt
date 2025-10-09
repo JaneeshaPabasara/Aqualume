@@ -77,38 +77,41 @@ class AddFragment : Fragment() {
         // Generate tasks from user settings
         val settings = prefsManager.getUserSettings()
 
-        // Add water task if not exists
-        if (allTasks.none { it.title.contains("water", ignoreCase = true) }) {
-            val waterTask = Task(
-                title = "Drink water - ${settings.waterGoal / 1000} liters",
-                isCompleted = false
-            )
-            prefsManager.saveTask(waterTask)
-            allTasks.add(waterTask)
-        }
+        // Remove old tasks and recreate them with updated values
+        allTasks.removeAll { it.title.contains("water", ignoreCase = true) ||
+                it.title.contains("meditate", ignoreCase = true) ||
+                it.title.contains("journal", ignoreCase = true) }
 
-        // Add meditation task if not exists
-        if (allTasks.none { it.title.contains("meditate", ignoreCase = true) }) {
-            val meditationTask = Task(
-                title = "Meditate ${settings.meditationGoal} min",
-                isCompleted = false
-            )
-            prefsManager.saveTask(meditationTask)
-            allTasks.add(meditationTask)
-        }
+        // Create fresh tasks with current goals
+        val waterTask = Task(
+            title = "Drink water - ${settings.waterGoal / 1000} liters",
+            isCompleted = false
+        )
 
-        // Add journal task if not exists
-        if (allTasks.none { it.title.contains("journal", ignoreCase = true) }) {
-            val journalTask = Task(
-                title = "Write the journal",
-                isCompleted = false
-            )
-            prefsManager.saveTask(journalTask)
-            allTasks.add(journalTask)
-        }
+        val meditationTask = Task(
+            title = "Meditate ${settings.meditationGoal} min",
+            isCompleted = false
+        )
 
-        taskAdapter.submitList(allTasks.sortedBy { it.isCompleted })
+        val journalTask = Task(
+            title = "Write the journal",
+            isCompleted = false
+        )
+
+        // Clear all tasks from preferences
+        prefsManager.clearAllTasks()
+
+        // Save new tasks
+        prefsManager.saveTask(waterTask)
+        prefsManager.saveTask(meditationTask)
+        prefsManager.saveTask(journalTask)
+
+        // Load fresh task list
+        val updatedTasks = prefsManager.getAllTasks()
+
+        taskAdapter.submitList(updatedTasks.sortedBy { it.isCompleted })
     }
+
 
     override fun onResume() {
         super.onResume()

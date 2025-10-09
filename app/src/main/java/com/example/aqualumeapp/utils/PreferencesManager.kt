@@ -12,61 +12,73 @@ class PreferencesManager(context: Context) {
         context.getSharedPreferences("AqualumePrefs", Context.MODE_PRIVATE)
     private val gson = Gson()
 
+    companion object {
+        private const val KEY_USER_SETTINGS = "user_settings"
+        private const val KEY_WATER_LOGS = "water_logs"
+        private const val KEY_MEDITATION_LOGS = "meditation_logs"
+        private const val KEY_MOOD_LOGS = "mood_logs"
+        private const val KEY_TASKS = "tasks"
+        private const val KEY_MEDITATION_GOAL = "meditation_goal"
+    }
+
+    // User Settings
+    fun getUserSettings(): UserSettings {
+        val json = prefs.getString(KEY_USER_SETTINGS, null)
+        return if (json != null) {
+            gson.fromJson(json, UserSettings::class.java)
+        } else {
+            UserSettings() // Return default settings
+        }
+    }
+
+    fun saveUserSettings(settings: UserSettings) {
+        val json = gson.toJson(settings)
+        prefs.edit().putString(KEY_USER_SETTINGS, json).apply()
+    }
+
     // Water Logs
-    fun saveWaterLog(log: WaterLog) {
-        val logs = getWaterLogs().toMutableList()
-        logs.add(log)
-        saveWaterLogs(logs)
-    }
-
     fun getWaterLogs(): List<WaterLog> {
-        val json = prefs.getString("water_logs", null) ?: return emptyList()
+        val json = prefs.getString(KEY_WATER_LOGS, null) ?: return emptyList()
         val type = object : TypeToken<List<WaterLog>>() {}.type
-        return gson.fromJson(json, type) ?: emptyList()
+        return gson.fromJson(json, type)
     }
 
-    private fun saveWaterLogs(logs: List<WaterLog>) {
-        val json = gson.toJson(logs)
-        prefs.edit().putString("water_logs", json).apply()
-    }
-
-    fun updateWaterLog(updated: WaterLog) {
+    fun saveWaterLog(waterLog: WaterLog) {
         val logs = getWaterLogs().toMutableList()
-        val index = logs.indexOfFirst { it.id == updated.id }
+        logs.add(waterLog)
+        val json = gson.toJson(logs)
+        prefs.edit().putString(KEY_WATER_LOGS, json).apply()
+    }
+
+    fun updateWaterLog(waterLog: WaterLog) {
+        val logs = getWaterLogs().toMutableList()
+        val index = logs.indexOfFirst { it.id == waterLog.id }
         if (index != -1) {
-            logs[index] = updated
-            saveWaterLogs(logs)
+            logs[index] = waterLog
+            val json = gson.toJson(logs)
+            prefs.edit().putString(KEY_WATER_LOGS, json).apply()
         }
     }
 
     fun deleteWaterLog(logId: Long) {
         val logs = getWaterLogs().toMutableList()
         logs.removeAll { it.id == logId }
-        saveWaterLogs(logs)
+        val json = gson.toJson(logs)
+        prefs.edit().putString(KEY_WATER_LOGS, json).apply()
     }
 
     // Meditation Logs
-    fun saveMeditationLog(log: MeditationLog) {
-        val logs = getMeditationLogs().toMutableList()
-        logs.add(log)
-        saveMeditationLogs(logs)
-    }
-
     fun getMeditationLogs(): List<MeditationLog> {
-        val json = prefs.getString("meditation_logs", null) ?: return emptyList()
+        val json = prefs.getString(KEY_MEDITATION_LOGS, null) ?: return emptyList()
         val type = object : TypeToken<List<MeditationLog>>() {}.type
-        return gson.fromJson(json, type) ?: emptyList()
+        return gson.fromJson(json, type)
     }
 
-    private fun saveMeditationLogs(logs: List<MeditationLog>) {
-        val json = gson.toJson(logs)
-        prefs.edit().putString("meditation_logs", json).apply()
-    }
-
-    fun deleteMeditationLog(logId: Long) {
+    fun saveMeditationLog(meditationLog: MeditationLog) {
         val logs = getMeditationLogs().toMutableList()
-        logs.removeAll { it.id == logId }
-        saveMeditationLogs(logs)
+        logs.add(meditationLog)
+        val json = gson.toJson(logs)
+        prefs.edit().putString(KEY_MEDITATION_LOGS, json).apply()
     }
 
     fun updateMeditationLog(logId: Long, duration: Int, completed: Boolean) {
@@ -74,40 +86,30 @@ class PreferencesManager(context: Context) {
         val index = logs.indexOfFirst { it.id == logId }
         if (index != -1) {
             logs[index] = logs[index].copy(duration = duration, isCompleted = completed)
-            saveMeditationLogs(logs)
+            val json = gson.toJson(logs)
+            prefs.edit().putString(KEY_MEDITATION_LOGS, json).apply()
         }
     }
 
-    fun getMeditationGoal(): Int {
-        return prefs.getInt("meditation_goal", 20)
-    }
-
-    fun setMeditationGoal(goal: Int) {
-        prefs.edit().putInt("meditation_goal", goal).apply()
+    fun deleteMeditationLog(logId: Long) {
+        val logs = getMeditationLogs().toMutableList()
+        logs.removeAll { it.id == logId }
+        val json = gson.toJson(logs)
+        prefs.edit().putString(KEY_MEDITATION_LOGS, json).apply()
     }
 
     // Mood Logs
-    fun saveMoodLog(log: MoodLog) {
-        val logs = getMoodLogs().toMutableList()
-        logs.add(log)
-        saveMoodLogs(logs)
-    }
-
     fun getMoodLogs(): List<MoodLog> {
-        val json = prefs.getString("mood_logs", null) ?: return emptyList()
+        val json = prefs.getString(KEY_MOOD_LOGS, null) ?: return emptyList()
         val type = object : TypeToken<List<MoodLog>>() {}.type
-        return gson.fromJson(json, type) ?: emptyList()
+        return gson.fromJson(json, type)
     }
 
-    private fun saveMoodLogs(logs: List<MoodLog>) {
-        val json = gson.toJson(logs)
-        prefs.edit().putString("mood_logs", json).apply()
-    }
-
-    fun deleteMoodLog(logId: Long) {
+    fun saveMoodLog(moodLog: MoodLog) {
         val logs = getMoodLogs().toMutableList()
-        logs.removeAll { it.id == logId }
-        saveMoodLogs(logs)
+        logs.add(moodLog)
+        val json = gson.toJson(logs)
+        prefs.edit().putString(KEY_MOOD_LOGS, json).apply()
     }
 
     fun updateMoodLog(logId: Long, moodName: String, moodEmoji: Int) {
@@ -115,64 +117,52 @@ class PreferencesManager(context: Context) {
         val index = logs.indexOfFirst { it.id == logId }
         if (index != -1) {
             logs[index] = logs[index].copy(mood = moodName, moodDrawable = moodEmoji)
-            saveMoodLogs(logs)
+            val json = gson.toJson(logs)
+            prefs.edit().putString(KEY_MOOD_LOGS, json).apply()
         }
+    }
+
+    fun deleteMoodLog(logId: Long) {
+        val logs = getMoodLogs().toMutableList()
+        logs.removeAll { it.id == logId }
+        val json = gson.toJson(logs)
+        prefs.edit().putString(KEY_MOOD_LOGS, json).apply()
     }
 
     // Tasks
+    fun getAllTasks(): List<Task> {
+        val json = prefs.getString(KEY_TASKS, null) ?: return emptyList()
+        val type = object : TypeToken<List<Task>>() {}.type
+        return gson.fromJson(json, type)
+    }
+
     fun saveTask(task: Task) {
         val tasks = getAllTasks().toMutableList()
         tasks.add(task)
-        saveAllTasks(tasks)
-    }
-
-    fun getAllTasks(): List<Task> {
-        val json = prefs.getString("tasks", null) ?: return emptyList()
-        val type = object : TypeToken<List<Task>>() {}.type
-        return gson.fromJson(json, type) ?: emptyList()
-    }
-
-    private fun saveAllTasks(tasks: List<Task>) {
         val json = gson.toJson(tasks)
-        prefs.edit().putString("tasks", json).apply()
+        prefs.edit().putString(KEY_TASKS, json).apply()
     }
 
-    fun updateTaskCompletion(taskId: Long, completed: Boolean) {
+    fun updateTaskCompletion(taskId: Long, isCompleted: Boolean) {
         val tasks = getAllTasks().toMutableList()
         val index = tasks.indexOfFirst { it.id == taskId }
         if (index != -1) {
-            tasks[index] = tasks[index].copy(isCompleted = completed)
-            saveAllTasks(tasks)
+            tasks[index] = tasks[index].copy(isCompleted = isCompleted)
+            val json = gson.toJson(tasks)
+            prefs.edit().putString(KEY_TASKS, json).apply()
         }
     }
 
-    fun deleteTask(taskId: Long) {
-        val tasks = getAllTasks().toMutableList()
-        tasks.removeAll { it.id == taskId }
-        saveAllTasks(tasks)
+    fun clearAllTasks() {
+        prefs.edit().remove(KEY_TASKS).apply()
     }
 
-    // User Settings
-    fun getUserSettings(): UserSettings {
-        val json = prefs.getString("user_settings", null)
-        return if (json != null) {
-            gson.fromJson(json, UserSettings::class.java)
-        } else {
-            UserSettings()
-        }
+    // Meditation Goal
+    fun getMeditationGoal(): Int {
+        return prefs.getInt(KEY_MEDITATION_GOAL, 20) // Default 20 minutes
     }
 
-    fun saveUserSettings(settings: UserSettings) {
-        val json = gson.toJson(settings)
-        prefs.edit().putString("user_settings", json).apply()
-    }
-
-    // First Launch
-    fun isFirstLaunch(): Boolean {
-        return prefs.getBoolean("is_first_launch", true)
-    }
-
-    fun setFirstLaunchComplete() {
-        prefs.edit().putBoolean("is_first_launch", false).apply()
+    fun setMeditationGoal(goal: Int) {
+        prefs.edit().putInt(KEY_MEDITATION_GOAL, goal).apply()
     }
 }
