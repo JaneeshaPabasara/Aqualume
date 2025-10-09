@@ -87,7 +87,8 @@ class WaterFragment : Fragment() {
         binding.spinnerGoal.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val goal = (position + 1) * 1000
-                prefsManager.setWaterGoal(goal)
+                val settings = prefsManager.getUserSettings()
+                prefsManager.saveUserSettings(settings.copy(waterGoal = goal))
             }
 
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
@@ -96,10 +97,11 @@ class WaterFragment : Fragment() {
 
     private fun loadSettings() {
         val settings = prefsManager.getUserSettings()
-        val goalInLiters = settings.waterGoal / 1000
+        val goalInLiters = (settings.waterGoal / 1000).coerceIn(1, 10)
         binding.spinnerGoal.setSelection(goalInLiters - 1)
         binding.switchReminder.isChecked = settings.waterReminderEnabled
-        binding.spinnerDuration.setSelection(settings.waterReminderInterval - 1)
+        val hours = TimeUnit.MILLISECONDS.toHours(settings.waterReminderInterval).toInt().coerceIn(1, 12)
+        binding.spinnerDuration.setSelection(hours - 1)
     }
 
     private fun scheduleWaterReminders() {
@@ -121,7 +123,7 @@ class WaterFragment : Fragment() {
 
         val settings = prefsManager.getUserSettings()
         prefsManager.saveUserSettings(settings.copy(
-            waterReminderInterval = duration.toInt()
+            waterReminderInterval = TimeUnit.HOURS.toMillis(duration)
         ))
     }
 

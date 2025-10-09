@@ -1,4 +1,4 @@
-package com.example.aqualumeapp.fragment
+package com.example.aqualumeapp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

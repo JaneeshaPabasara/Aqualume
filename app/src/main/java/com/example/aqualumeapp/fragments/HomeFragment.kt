@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aqualumeapp.R
-import com.example.aqualumeapp.adapters.TaskAdapter
 import com.example.aqualumeapp.databinding.FragmentHomeBinding
-import com.example.aqualumeapp.utils.PreferencesManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,8 +15,6 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding?= null
     private val binding get() = _binding!!
-    private lateinit var prefsManager: PreferencesManager
-    private lateinit var taskAdapter: TaskAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,11 +28,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        prefsManager = PreferencesManager(requireContext())
 
         setupUI()
         setupClickListeners()
-        loadTasks()
     }
 
     private fun setupUI() {
@@ -45,17 +38,6 @@ class HomeFragment : Fragment() {
         val dateFormat = SimpleDateFormat("d MMMM yyyy", Locale.getDefault())
         binding.tvDate.text = dateFormat.format(Date())
 
-        // Setup RecyclerView
-        taskAdapter = TaskAdapter(
-            onTaskClick = { task ->
-                prefsManager.updateTask(task.id, !task.isCompleted)
-                loadTasks()
-            }
-        )
-        binding.rvTasks.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = taskAdapter
-        }
     }
 
     private fun setupClickListeners() {
@@ -80,15 +62,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun loadTasks() {
-        val tasks = prefsManager.getTasks()
-        taskAdapter.submitList(tasks)
-    }
 
-    override fun onResume() {
-        super.onResume()
-        loadTasks()
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

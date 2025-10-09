@@ -127,8 +127,6 @@
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:StrockColor="@color/black"
-
                         android:padding="12dp" />
 <!--                    android:background="@drawable/spinner_background"-->
                     <TextView

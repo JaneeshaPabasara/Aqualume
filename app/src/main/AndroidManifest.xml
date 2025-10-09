@@ -17,7 +17,6 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-            android:theme="@style/Theme.AqualumeApp.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

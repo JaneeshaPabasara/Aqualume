@@ -11,15 +11,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.aqualumeapp.databinding.FragmentAddMeditationBinding
 import com.example.aqualumeapp.models.MeditationLog
 import com.example.aqualumeapp.utils.PreferencesManager
-import java.text.SimpleDateFormat
-import java.util.*
 
 class AddMeditationFragment : Fragment() {
 
     private var _binding: FragmentAddMeditationBinding? = null
     private val binding get() = _binding!!
     private lateinit var prefsManager: PreferencesManager
-    private var editingLogId: String? = null
+    private var editingLogId: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,9 +34,10 @@ class AddMeditationFragment : Fragment() {
         prefsManager = PreferencesManager(requireContext())
 
         // Check if editing existing log
-        arguments?.getString("logId")?.let {
-            editingLogId = it
-            loadExistingLog(it)
+        if (arguments?.containsKey("logId") == true) {
+            val id = requireArguments().getLong("logId")
+            editingLogId = id
+            loadExistingLog(id)
         }
 
         setupUI()
@@ -83,26 +82,11 @@ class AddMeditationFragment : Fragment() {
     private fun addOrUpdateMeditation() {
         val duration = binding.spinnerDuration.selectedItem.toString().toInt()
 
-        val timeFormat = SimpleDateFormat("h.mm a", Locale.getDefault())
-        val timestamp = System.currentTimeMillis()
-        val timeString = timeFormat.format(Date(timestamp))
-
         if (editingLogId != null) {
-            val updatedLog = MeditationLog(
-                id = editingLogId!!,
-                duration = duration,
-                timestamp = timestamp,
-                timeString = timeString
-            )
-            prefsManager.updateMeditationLog(updatedLog)
+            prefsManager.updateMeditationLog(editingLogId!!, duration, true)
             Toast.makeText(requireContext(), "Meditation updated!", Toast.LENGTH_SHORT).show()
         } else {
-            val meditationLog = MeditationLog(
-                id = UUID.randomUUID().toString(),
-                duration = duration,
-                timestamp = timestamp,
-                timeString = timeString
-            )
+            val meditationLog = MeditationLog(duration = duration)
             prefsManager.saveMeditationLog(meditationLog)
             Toast.makeText(requireContext(), "Meditation added successfully!", Toast.LENGTH_SHORT).show()
         }

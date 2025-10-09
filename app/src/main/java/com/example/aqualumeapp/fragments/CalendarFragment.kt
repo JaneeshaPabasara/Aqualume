@@ -81,13 +81,12 @@ class CalendarFragment : Fragment() {
         val waterLogs = prefsManager.getWaterLogs()
             .filter { it.timestamp in startOfDay..endOfDay }
         val totalWater = waterLogs.sumOf { it.amount }
-        val waterGoal = prefsManager.getWaterGoal()
+        val waterGoal = prefsManager.getUserSettings().waterGoal
         val waterPercentage = if (waterGoal > 0) (totalWater.toFloat() / waterGoal * 100).toInt() else 0
 
         binding.tvWaterPercentage.text = "$waterPercentage%"
         binding.tvWaterCompleted.text = "Completed"
         binding.tvWaterTarget.text = "Target - ${waterGoal / 1000} liters"
-        binding.progressWater.progress = waterPercentage
 
         // Load meditation data
         val meditationLogs = prefsManager.getMeditationLogs()
@@ -99,7 +98,6 @@ class CalendarFragment : Fragment() {
         binding.tvMeditationPercentage.text = "$meditationPercentage%"
         binding.tvMeditationCompleted.text = "Completed"
         binding.tvMeditationTarget.text = "Target - $meditationGoal minutes"
-        binding.progressMeditation.progress = meditationPercentage
 
         // Load mood data
         val moodLogs = prefsManager.getMoodLogs()
@@ -115,7 +113,6 @@ class CalendarFragment : Fragment() {
 
         binding.tvMoodSummary.text = moodSummary
         val moodPercentage = if (moodLogs.isNotEmpty()) 100 else 0
-        binding.progressMood.progress = moodPercentage
     }
 
     override fun onResume() {

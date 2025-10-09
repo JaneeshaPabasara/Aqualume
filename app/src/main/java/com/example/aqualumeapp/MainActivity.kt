@@ -1,13 +1,13 @@
 package com.example.aqualumeapp
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.aqualumeapp.fragment.HydrationHistoryFragment
+import com.example.aqualumeapp.fragments.HydrationHistoryFragment
 import com.example.aqualumeapp.fragments.CalendarFragment
 import com.example.aqualumeapp.fragments.HomeFragment
 import com.example.aqualumeapp.fragments.ProfileFragment
+import com.example.aqualumeapp.fragments.AddFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -32,25 +32,19 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.homeFragment -> {
-                    // Already on home, do nothing
+                    loadFragment(HomeFragment())
                     true
                 }
                 R.id.addFragment -> {
-                    startActivity(Intent(this, HomeFragment::class.java))
-                    overridePendingTransition(0, 0)
-                    finish()
+                    loadFragment(AddFragment())
                     true
                 }
                 R.id.calendarFragment -> {
-                    startActivity(Intent(this, CalendarFragment::class.java))
-                    overridePendingTransition(0, 0)
-                    finish()
+                    loadFragment(CalendarFragment())
                     true
                 }
                 R.id.profileFragment -> {
-                    startActivity(Intent(this, ProfileFragment::class.java))
-                    overridePendingTransition(0, 0)
-                    finish()
+                    loadFragment(ProfileFragment())
                     true
                 }
                 else -> false

@@ -30,6 +30,15 @@ class PreferencesManager(context: Context) {
         prefs.edit().putString("water_logs", json).apply()
     }
 
+    fun updateWaterLog(updated: WaterLog) {
+        val logs = getWaterLogs().toMutableList()
+        val index = logs.indexOfFirst { it.id == updated.id }
+        if (index != -1) {
+            logs[index] = updated
+            saveWaterLogs(logs)
+        }
+    }
+
     fun deleteWaterLog(logId: Long) {
         val logs = getWaterLogs().toMutableList()
         logs.removeAll { it.id == logId }
@@ -71,6 +80,10 @@ class PreferencesManager(context: Context) {
 
     fun getMeditationGoal(): Int {
         return prefs.getInt("meditation_goal", 20)
+    }
+
+    fun setMeditationGoal(goal: Int) {
+        prefs.edit().putInt("meditation_goal", goal).apply()
     }
 
     // Mood Logs

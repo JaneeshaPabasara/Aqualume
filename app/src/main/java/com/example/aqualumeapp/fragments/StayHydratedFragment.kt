@@ -22,7 +22,7 @@ class StayHydratedFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var prefsManager: PreferencesManager
     private var selectedAmount = 250
-    private var editingLogId: String? = null
+    private var editingLogId: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,9 +39,19 @@ class StayHydratedFragment : Fragment() {
         prefsManager = PreferencesManager(requireContext())
 
         // Check if editing existing log
-        arguments?.getString("logId")?.let {
-            editingLogId = it
-            loadExistingLog(it)
+        arguments?.get("logId")?.let { arg ->
+            when (arg) {
+                is Long -> {
+                    editingLogId = arg
+                    loadExistingLog(arg)
+                }
+                is String -> {
+                    arg.toLongOrNull()?.let { id ->
+                        editingLogId = id
+                        loadExistingLog(id)
+                    }
+                }
+            }
         }
 
         setupUI()
@@ -112,25 +122,20 @@ class StayHydratedFragment : Fragment() {
             return
         }
 
-        val timeFormat = SimpleDateFormat("h.mm a", Locale.getDefault())
         val timestamp = System.currentTimeMillis()
-        val timeString = timeFormat.format(Date(timestamp))
 
         if (editingLogId != null) {
             val updatedLog = WaterLog(
                 id = editingLogId!!,
                 amount = amount,
-                timestamp = timestamp,
-                timeString = timeString
+                timestamp = timestamp
             )
             prefsManager.updateWaterLog(updatedLog)
             Toast.makeText(requireContext(), "Water log updated!", Toast.LENGTH_SHORT).show()
         } else {
             val waterLog = WaterLog(
-                id = UUID.randomUUID().toString(),
                 amount = amount,
-                timestamp = timestamp,
-                timeString = timeString
+                timestamp = timestamp
             )
             prefsManager.saveWaterLog(waterLog)
             Toast.makeText(requireContext(), "Water added successfully!", Toast.LENGTH_SHORT).show()
@@ -139,12 +144,13 @@ class StayHydratedFragment : Fragment() {
         findNavController().navigateUp()
     }
 
-    private fun loadExistingLog(logId: String) {
+    private fun loadExistingLog(logId: Long) {
         val log = prefsManager.getWaterLogs().find { it.id == logId }
         log?.let {
             selectedAmount = it.amount
             binding.etCustomAmount.setText(it.amount.toString())
             binding.btnAddWater.text = "Update Water"
+            updateSelectedWaterType()
         }
     }
 

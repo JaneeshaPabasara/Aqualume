@@ -54,7 +54,7 @@ class MoodHistoryFragment : Fragment() {
             }
         )
 
-        binding.rvMoodLogs.apply {
+        binding.rvMoodLog.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = moodLogAdapter
         }
