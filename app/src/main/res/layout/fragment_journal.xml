@@ -236,15 +236,14 @@
                         android:layout_height="48dp"
                         android:layout_weight="1"
                         android:padding="12dp"
-                        android:strokeColor="@color/button_primary" />
+                         />
+<!--                    android:strokeColor="@color/button_primary"-->
 
                     <Spinner
                         android:id="@+id/spinner_am_pm"
                         android:layout_width="93dp"
                         android:layout_height="48dp"
                         android:layout_marginStart="12dp"
-                        app:strokeColor="@color/button_primary"
-
                         android:padding="12dp" />
 <!--                    android:background="@drawable/spinner_background3"-->
                 </LinearLayout>

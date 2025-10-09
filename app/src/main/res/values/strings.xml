@@ -150,4 +150,12 @@
     <string name="_01_10_20252">01/10/2025</string>
     <string name="_3_liters_completed">3 liters Completed</string>
     <string name="dropdown">dropdown</string>
+    <string name="update_water_consumptionn">Update water consumption</string>
+    <string name="add4">Add</string>
+    <string name="update_meditate_time1">Update meditate time</string>
+    <string name="add5">Add</string>
+    <string name="update_journal1">Update Journal</string>
+    <string name="add6">Add</string>
+    <string name="update_meditate_timee">Update meditate time</string>
+    <string name="add7">Add</string>
 </resources>

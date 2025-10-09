@@ -51,6 +51,10 @@ class StayHydratedFragment : Fragment() {
                         loadExistingLog(id)
                     }
                 }
+                else-> {
+                    Toast.makeText(requireContext(), "Invalid log id", Toast.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
+                }
             }
         }
 

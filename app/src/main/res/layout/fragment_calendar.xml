@@ -294,7 +294,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Update meditate time"
+                            android:text="@string/update_meditate_timee"
                             android:textSize="14sp"
                             android:textColor="@color/primary_text" />
 
@@ -302,7 +302,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/ic_add"
-                            android:contentDescription="Add" />
+                            android:contentDescription="@string/add7" />
 
                     </LinearLayout>
 
