@@ -13,10 +13,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AqualumeApp">
+        android:theme="@style/Theme.AqualumeApp"
+        tools:targetApi="31">
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AqualumeApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +28,14 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.AqualumeApp"/>
+
+        <!-- Worker for Reminders -->
+<!--        <receiver-->
+<!--            android:name=".workers.ReminderWorker"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="false" />-->
     </application>
 
 </manifest>

@@ -1,74 +1,56 @@
 package com.example.aqualumeapp
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.example.aqualumeapp.fragments.HydrationHistoryFragment
-import com.example.aqualumeapp.fragments.CalendarFragment
-import com.example.aqualumeapp.fragments.HomeFragment
-import com.example.aqualumeapp.fragments.ProfileFragment
-import com.example.aqualumeapp.fragments.AddFragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_with_bottom_nav)
+        setContentView(R.layout.activity_main)
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        // Initialize NavController
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-        // Load initial fragment
-        if (savedInstanceState == null) {
-            loadFragment(HydrationHistoryFragment())
-        }
+        // Initialize Bottom Navigation
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setupWithNavController(navController)
 
-        setupBottomNavigation()
-    }
-
-    private fun setupBottomNavigation() {
-        bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.homeFragment -> {
-                    loadFragment(HomeFragment())
-                    true
-                }
-                R.id.addFragment -> {
-                    loadFragment(AddFragment())
-                    true
-                }
-                R.id.calendarFragment -> {
-                    loadFragment(CalendarFragment())
-                    true
-                }
+        // Handle navigation to hide/show bottom nav
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.homeFragment,
+                R.id.addFragment,
+                R.id.calendarFragment,
                 R.id.profileFragment -> {
-                    loadFragment(ProfileFragment())
-                    true
+                    showBottomNavigation()
                 }
-                else -> false
+                else -> {
+                    hideBottomNavigation()
+                }
             }
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-            .commit()
+    fun showBottomNavigation() {
+        bottomNavigationView.visibility = View.VISIBLE
     }
 
-    private fun showAddWaterDialog() {
-        // Implement add water dialog/bottom sheet
-        // This keeps the bottom nav visible while showing add water UI
+    fun hideBottomNavigation() {
+        bottomNavigationView.visibility = View.GONE
     }
 
-    // Method to show/hide bottom navigation from fragments
-    fun setBottomNavigationVisibility(visible: Boolean) {
-        bottomNavigationView.visibility = if (visible) {
-            android.view.View.VISIBLE
-        } else {
-            android.view.View.GONE
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

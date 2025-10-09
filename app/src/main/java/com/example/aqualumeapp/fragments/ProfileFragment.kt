@@ -3,7 +3,10 @@ package com.example.aqualumeapp.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+
 import android.view.ViewGroup
+
+
 import androidx.fragment.app.Fragment
 import com.example.aqualumeapp.databinding.FragmentProfileBinding
 import com.example.aqualumeapp.utils.PreferencesManager
@@ -36,15 +39,22 @@ class ProfileFragment : Fragment() {
         val meditationLogs = prefsManager.getMeditationLogs()
         val moodLogs = prefsManager.getMoodLogs()
 
+        // Display counts
         binding.tvWaterCount.text = waterLogs.size.toString()
         binding.tvMeditationCount.text = meditationLogs.size.toString()
         binding.tvMoodCount.text = moodLogs.size.toString()
 
+        // Display totals
         val totalWater = waterLogs.sumOf { it.amount }
         binding.tvTotalWater.text = "${totalWater / 1000}L"
 
         val totalMeditation = meditationLogs.sumOf { it.duration }
         binding.tvTotalMeditation.text = "${totalMeditation}min"
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadStats()
     }
 
     override fun onDestroyView() {

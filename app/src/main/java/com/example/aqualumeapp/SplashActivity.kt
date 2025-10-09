@@ -5,21 +5,27 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.example.aqualumeapp.utils.PreferencesManager
+import android.widget.Button
 
 class SplashActivity : AppCompatActivity() {
-
-    private lateinit var prefsManager: PreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        prefsManager = PreferencesManager(this)
-
-        Handler(Looper.getMainLooper()).postDelayed({
+        // Get Started button click
+        val btnGetStarted = findViewById<Button>(R.id.btn_get_started)
+        btnGetStarted.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, 2000)
+        }
+
+        // Auto-navigate after 3 seconds if button not clicked
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (!isFinishing) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        }, 3000)
     }
 }

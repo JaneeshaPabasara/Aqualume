@@ -1,5 +1,6 @@
 package com.example.aqualumeapp.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.aqualumeapp.R
 import com.example.aqualumeapp.databinding.FragmentCalendarBinding
 import com.example.aqualumeapp.utils.PreferencesManager
-import java.text.SimpleDateFormat
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import java.util.*
 
 class CalendarFragment : Fragment() {
@@ -88,6 +91,9 @@ class CalendarFragment : Fragment() {
         binding.tvWaterCompleted.text = "Completed"
         binding.tvWaterTarget.text = "Target - ${waterGoal / 1000} liters"
 
+        // Setup water chart
+        setupWaterChart(waterPercentage)
+
         // Load meditation data
         val meditationLogs = prefsManager.getMeditationLogs()
             .filter { it.timestamp in startOfDay..endOfDay }
@@ -98,6 +104,9 @@ class CalendarFragment : Fragment() {
         binding.tvMeditationPercentage.text = "$meditationPercentage%"
         binding.tvMeditationCompleted.text = "Completed"
         binding.tvMeditationTarget.text = "Target - $meditationGoal minutes"
+
+        // Setup meditation chart
+        setupMeditationChart(meditationPercentage)
 
         // Load mood data
         val moodLogs = prefsManager.getMoodLogs()
@@ -112,7 +121,98 @@ class CalendarFragment : Fragment() {
         }
 
         binding.tvMoodSummary.text = moodSummary
-        val moodPercentage = if (moodLogs.isNotEmpty()) 100 else 0
+
+        // Setup mood chart
+        setupMoodChart(moodLogs)
+    }
+
+    private fun setupWaterChart(percentage: Int) {
+        val entries = listOf(
+            PieEntry(percentage.toFloat(), "Completed"),
+            PieEntry((100 - percentage).toFloat(), "Remaining")
+        )
+
+        val dataSet = PieDataSet(entries, "").apply {
+            colors = listOf(
+                Color.parseColor("#4FC3F7"),
+                Color.parseColor("#E0E0E0")
+            )
+            valueTextSize = 0f
+            setDrawValues(false)
+        }
+
+        binding.chartWater.apply {
+            data = PieData(dataSet)
+            description.isEnabled = false
+            legend.isEnabled = false
+            setDrawEntryLabels(false)
+            holeRadius = 70f
+            transparentCircleRadius = 75f
+            setHoleColor(Color.TRANSPARENT)
+            invalidate()
+        }
+    }
+
+    private fun setupMeditationChart(percentage: Int) {
+        val entries = listOf(
+            PieEntry(percentage.toFloat(), "Completed"),
+            PieEntry((100 - percentage).toFloat(), "Remaining")
+        )
+
+        val dataSet = PieDataSet(entries, "").apply {
+            colors = listOf(
+                Color.parseColor("#FFC107"),
+                Color.parseColor("#E0E0E0")
+            )
+            valueTextSize = 0f
+            setDrawValues(false)
+        }
+
+        binding.chartMeditation.apply {
+            data = PieData(dataSet)
+            description.isEnabled = false
+            legend.isEnabled = false
+            setDrawEntryLabels(false)
+            holeRadius = 70f
+            transparentCircleRadius = 75f
+            setHoleColor(Color.TRANSPARENT)
+            invalidate()
+        }
+    }
+
+    private fun setupMoodChart(moodLogs: List<com.example.aqualumeapp.models.MoodLog>) {
+        if (moodLogs.isEmpty()) {
+            binding.chartMood.visibility = View.GONE
+            return
+        }
+
+        binding.chartMood.visibility = View.VISIBLE
+
+        val moodCounts = moodLogs.groupBy { it.mood }.mapValues { it.value.size }
+        val entries = moodCounts.map { PieEntry(it.value.toFloat(), it.key) }
+
+        val dataSet = PieDataSet(entries, "").apply {
+            colors = listOf(
+                Color.parseColor("#4CAF50"),
+                Color.parseColor("#FFC107"),
+                Color.parseColor("#F44336"),
+                Color.parseColor("#2196F3"),
+                Color.parseColor("#9C27B0")
+            )
+            valueTextSize = 0f
+            setDrawValues(false)
+        }
+
+        binding.chartMood.apply {
+            data = PieData(dataSet)
+            description.isEnabled = false
+            legend.isEnabled = false
+            setDrawEntryLabels(false)
+            holeRadius = 70f
+            transparentCircleRadius = 75f
+            setHoleColor(Color.TRANSPARENT)
+            invalidate()
+        }
     }
 
     override fun onResume() {

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.work.Data
@@ -43,22 +44,19 @@ class WaterFragment : Fragment() {
     }
 
     private fun setupUI() {
-        // Setup goal spinner
+        // Setup goal spinner (1-10 liters)
         val goals = (1..10).map { it }.toTypedArray()
         val goalAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, goals)
         goalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerGoal.adapter = goalAdapter
 
-        // Setup duration spinner
+        // Setup duration spinner (1-12 hours)
         val durations = (1..12).map { it }.toTypedArray()
         val durationAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, durations)
         durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerDuration.adapter = durationAdapter
 
-        // Setup unit spinners
-        val unitAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("liters", "ml"))
-        unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
+        // Setup time unit spinner
         val timeUnitAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("hrs", "min"))
         timeUnitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerTimeUnit.adapter = timeUnitAdapter
@@ -73,6 +71,10 @@ class WaterFragment : Fragment() {
             findNavController().navigate(R.id.action_water_to_hydrationHistory)
         }
 
+        binding.btnAddWater.setOnClickListener {
+            saveSettings()
+        }
+
         binding.switchReminder.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 scheduleWaterReminders()
@@ -84,7 +86,7 @@ class WaterFragment : Fragment() {
             prefsManager.saveUserSettings(settings.copy(waterReminderEnabled = isChecked))
         }
 
-        binding.spinnerGoal.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
+        binding.spinnerGoal.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val goal = (position + 1) * 1000
                 val settings = prefsManager.getUserSettings()
@@ -92,7 +94,23 @@ class WaterFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
-        })
+        }
+    }
+
+    private fun saveSettings() {
+        val goal = (binding.spinnerGoal.selectedItemPosition + 1) * 1000
+        val duration = binding.spinnerDuration.selectedItem.toString().toLong()
+        val reminderEnabled = binding.switchReminder.isChecked
+
+        val settings = prefsManager.getUserSettings()
+        prefsManager.saveUserSettings(settings.copy(
+            waterGoal = goal,
+            waterReminderInterval = TimeUnit.HOURS.toMillis(duration),
+            waterReminderEnabled = reminderEnabled
+        ))
+
+        Toast.makeText(requireContext(), "Settings saved!", Toast.LENGTH_SHORT).show()
+        findNavController().navigateUp()
     }
 
     private fun loadSettings() {

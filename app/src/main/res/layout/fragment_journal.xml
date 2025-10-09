@@ -59,7 +59,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginTop="24dp"
-            android:contentDescription="@string/Back"
+            android:contentDescription="@string/back"
             android:padding="4dp"
             android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="sans-serif"
-            android:text="@string/Journal"
+            android:text="@string/journal"
             android:textColor="@color/primary_text"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -163,7 +163,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:contentDescription="@string/View"
+                    android:contentDescription="@string/view"
                     android:src="@drawable/ic_arrow_right" />
 
             </LinearLayout>
