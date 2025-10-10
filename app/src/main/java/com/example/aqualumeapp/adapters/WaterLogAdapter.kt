@@ -3,7 +3,7 @@ package com.example.aqualumeapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aqualumeapp.R
@@ -26,8 +26,8 @@ class WaterLogAdapter(
         val tvAmount: TextView = itemView.findViewById(R.id.tv_amount)
         val tvTime: TextView = itemView.findViewById(R.id.tv_time)
         val tvAchievement: TextView = itemView.findViewById(R.id.tvAchievement)
-        val btnEdit: ImageButton = itemView.findViewById(R.id.iv_edit)
-        val btnDelete: ImageButton = itemView.findViewById(R.id.iv_delete)
+        val btnEdit: ImageView = itemView.findViewById(R.id.iv_edit)
+        val btnDelete: ImageView = itemView.findViewById(R.id.iv_delete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WaterLogViewHolder {
