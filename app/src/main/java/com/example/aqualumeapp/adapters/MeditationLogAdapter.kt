@@ -2,6 +2,7 @@ package com.example.aqualumeapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -34,10 +35,7 @@ class MeditationLogAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(meditationLog: MeditationLog) {
-            binding.tvDuration.text = binding.root.context.getString(
-                R.string.time_duration,
-                meditationLog.duration
-            )
+            binding.tvDuration.text = "${meditationLog.duration} min"
             // Format time from timestamp
             val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
             binding.tvTime.text = timeFormat.format(Date(meditationLog.timestamp))

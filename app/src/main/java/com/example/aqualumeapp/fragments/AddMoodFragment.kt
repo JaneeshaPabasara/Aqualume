@@ -15,11 +15,13 @@ import com.example.aqualumeapp.utils.PreferencesManager
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.widget.ImageView
 
 class AddMoodFragment : Fragment() {
 
     private lateinit var btnSaveMood: Button
     private lateinit var etNote: EditText
+    private lateinit var ivBack: ImageView
     private lateinit var prefsManager: PreferencesManager
 
     private var mood: String = ""
@@ -46,9 +48,18 @@ class AddMoodFragment : Fragment() {
         // Initialize views
         btnSaveMood = view.findViewById(R.id.btn_add_mood)
         etNote = view.findViewById(R.id.et_thoughts)
+        ivBack = view.findViewById(R.id.iv_back)
 
+        setupBackButton()
         setupMoodClicks(view)
         setupSaveButton()
+
+    }
+
+    private fun setupBackButton() {
+        ivBack.setOnClickListener {
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
     }
 
     private fun setupMoodClicks(root: View) {
@@ -113,8 +124,6 @@ class AddMoodFragment : Fragment() {
                 Toast.makeText(requireContext(), "Mood saved successfully!", Toast.LENGTH_SHORT).show()
             }
 
-            // Navigate back or clear form
-            activity?.onBackPressedDispatcher?.onBackPressed()
         }
     }
 }
