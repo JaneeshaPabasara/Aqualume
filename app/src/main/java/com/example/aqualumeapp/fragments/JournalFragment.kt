@@ -16,6 +16,7 @@ import com.example.aqualumeapp.databinding.FragmentJournalBinding
 import com.example.aqualumeapp.utils.PreferencesManager
 import com.example.aqualumeapp.workers.ReminderWorker
 import java.util.concurrent.TimeUnit
+import android.widget.Toast
 
 class JournalFragment : Fragment() {
 
@@ -56,6 +57,16 @@ class JournalFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
+        // Back button
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        // Save button
+        binding.btnAddJournal.setOnClickListener {
+            saveSettings()
+            Toast.makeText(requireContext(), "Settings saved!", Toast.LENGTH_SHORT).show()
+        }
         binding.btnUpdateJournal.setOnClickListener {
             findNavController().navigate(R.id.action_journal_to_addMood)
         }
@@ -73,6 +84,19 @@ class JournalFragment : Fragment() {
 
             val settings = prefsManager.getUserSettings()
             prefsManager.saveUserSettings(settings.copy(journalReminderEnabled = isChecked))
+        }
+    }
+
+    private fun saveSettings() {
+        val hour = binding.spinnerHour.selectedItem.toString().toInt()
+        val amPm = binding.spinnerAmPm.selectedItem.toString()
+        val timeString = "$hour:00 $amPm"
+
+        val settings = prefsManager.getUserSettings()
+        prefsManager.saveUserSettings(settings.copy(journalReminderTime = timeString))
+
+        if (binding.switchReminder.isChecked) {
+            scheduleJournalReminder()
         }
     }
 

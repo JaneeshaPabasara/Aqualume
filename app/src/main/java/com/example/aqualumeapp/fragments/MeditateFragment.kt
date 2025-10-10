@@ -16,6 +16,7 @@ import com.example.aqualumeapp.databinding.FragmentMeditateBinding
 import com.example.aqualumeapp.utils.PreferencesManager
 import com.example.aqualumeapp.workers.ReminderWorker
 import java.util.concurrent.TimeUnit
+import android.widget.Toast
 
 class MeditateFragment : Fragment() {
 
@@ -66,6 +67,16 @@ class MeditateFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
+        // Back button
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        // Save button
+        binding.btnAddMeditate.setOnClickListener {
+            saveSettings()
+            Toast.makeText(requireContext(), "Settings saved!", Toast.LENGTH_SHORT).show()
+        }
         binding.btnUpdateTime.setOnClickListener {
             findNavController().navigate(R.id.action_meditate_to_addMeditation)
         }
@@ -89,10 +100,30 @@ class MeditateFragment : Fragment() {
             override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val goal = (position + 1) * 5
                 prefsManager.setMeditationGoal(goal)
+
+                // Update settings with new goal
+                val settings = prefsManager.getUserSettings()
+                prefsManager.saveUserSettings(settings.copy(meditationGoal = goal))
             }
 
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
         })
+    }
+
+    private fun saveSettings() {
+        val hour = binding.spinnerHour.selectedItem.toString().toInt()
+        val amPm = binding.spinnerAmPm.selectedItem.toString()
+        val timeString = "$hour:00 $amPm"
+
+        val goal = binding.spinnerGoal.selectedItem.toString().toInt()
+        prefsManager.setMeditationGoal(goal)
+
+        val settings = prefsManager.getUserSettings()
+        prefsManager.saveUserSettings(settings.copy(meditationGoal = goal,meditationReminderTime = timeString))
+
+        if (binding.switchReminder.isChecked) {
+            scheduleMeditationReminder()
+        }
     }
 
     private fun loadSettings() {
