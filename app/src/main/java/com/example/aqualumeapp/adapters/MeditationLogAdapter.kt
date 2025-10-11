@@ -61,8 +61,7 @@ class MeditationLogAdapter(
             // Set time
             binding.tvTime.text = timeFormat.format(Date(meditationLog.timestamp))
 
-            // Hide individual date (we're using date headers instead)
-            binding.tvDate.visibility = View.GONE
+
 
             // Set click listeners
             binding.ivEdit.setOnClickListener {
