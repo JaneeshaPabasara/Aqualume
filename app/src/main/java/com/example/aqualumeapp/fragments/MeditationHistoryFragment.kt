@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -45,13 +46,20 @@ class MeditationHistoryFragment : Fragment() {
     private fun setupRecyclerView() {
         meditationLogAdapter = MeditationLogAdapter(
             onEditClick = { log ->
-                val bundle = bundleOf("logId" to log.id)
+                val bundle = bundleOf("logId" to log.id.toString())
                 findNavController().navigate(R.id.action_meditationHistory_to_addMeditation, bundle)
             },
 
             onDeleteClick = { log ->
-                prefsManager.deleteMeditationLog(log.id)
-                loadMeditationLogs()
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Delete Log")
+                    .setMessage("Are you sure you want to delete this meditation log?")
+                    .setPositiveButton("Delete") { _, _ ->
+                        prefsManager.deleteMeditationLog(log.id)
+                        loadMeditationLogs()
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
             }
         )
 
@@ -115,6 +123,12 @@ class MeditationHistoryFragment : Fragment() {
         }
 
         meditationLogAdapter.submitList(filteredLogs.sortedByDescending { it.timestamp })
+    }
+
+    //reload logs when returning from edit
+    override fun onResume() {
+        super.onResume()
+        loadMeditationLogs()
     }
 
     override fun onDestroyView() {

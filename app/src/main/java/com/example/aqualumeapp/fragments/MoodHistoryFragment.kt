@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -45,12 +46,19 @@ class MoodHistoryFragment : Fragment() {
     private fun setupRecyclerView() {
         moodLogAdapter = MoodLogAdapter(
             onEditClick = { log ->
-                val bundle = bundleOf("logId" to log.id)
+                val bundle = bundleOf("logId" to log.toString())
                 findNavController().navigate(R.id.action_moodHistory_to_addMood, bundle)
             },
             onDeleteClick = { log ->
-                prefsManager.deleteMoodLog(log.id)
-                loadMoodLogs()
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Delete Log")
+                    .setMessage("Are you sure you want to delete this mood log?")
+                    .setPositiveButton("Delete") { _, _ ->
+                        prefsManager.deleteMoodLog(log.id)
+                        loadMoodLogs()
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
             }
         )
 
@@ -115,6 +123,11 @@ class MoodHistoryFragment : Fragment() {
 
         moodLogAdapter.submitList(filteredLogs.sortedByDescending { it.timestamp })
     }
+    override fun onResume() {
+        super.onResume()
+        loadMoodLogs()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
