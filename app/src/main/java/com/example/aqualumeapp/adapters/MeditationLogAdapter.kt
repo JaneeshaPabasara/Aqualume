@@ -11,6 +11,7 @@ import com.example.aqualumeapp.models.MeditationLog
 import java.text.SimpleDateFormat
 import java.util.*
 import com.example.aqualumeapp.R
+import com.example.aqualumeapp.models.WaterLog
 
 class MeditationLogAdapter(
     private val onEditClick: (MeditationLog) -> Unit,
@@ -58,6 +59,8 @@ class MeditationLogAdapter(
             binding.ivDelete.setOnClickListener {
                 onDeleteClick(meditationLog)
             }
+
+
         }
     }
 
@@ -73,4 +76,5 @@ class MeditationLogAdapter(
             return oldItem == newItem
         }
     }
+
 }

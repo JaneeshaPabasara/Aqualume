@@ -48,6 +48,7 @@ class MeditationHistoryFragment : Fragment() {
                 val bundle = bundleOf("logId" to log.id)
                 findNavController().navigate(R.id.action_meditationHistory_to_addMeditation, bundle)
             },
+
             onDeleteClick = { log ->
                 prefsManager.deleteMeditationLog(log.id)
                 loadMeditationLogs()

@@ -7,6 +7,16 @@
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="12dp"
     app:cardElevation="0dp">
+    <TextView
+        android:id="@+id/tvDateHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/_01_10_20255"
+        android:textColor="#666666"
+        android:textSize="14sp"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="wrap_content"
