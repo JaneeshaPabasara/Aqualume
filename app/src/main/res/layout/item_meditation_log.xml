@@ -7,18 +7,20 @@
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="12dp"
     app:cardElevation="0dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
     <TextView
         android:id="@+id/tvDateHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="8dp"
         android:text="@string/_01_10_20255"
-        android:textColor="#666666"
+        android:textColor="@color/black"
         android:textSize="14sp"
         android:visibility="gone" />
 
@@ -36,7 +38,7 @@
             android:src="@drawable/ic_meditation" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
@@ -46,11 +48,12 @@
                 android:id="@+id/tv_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="200dp"
+
                 android:fontFamily="sans-serif"
                 android:text="@string/_20_min"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
+<!--            android:layout_marginEnd="200dp"-->
 
 
                 <TextView
@@ -84,6 +87,6 @@
             android:src="@drawable/ic_delete" />
 
     </LinearLayout>
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </com.google.android.material.card.MaterialCardView>
