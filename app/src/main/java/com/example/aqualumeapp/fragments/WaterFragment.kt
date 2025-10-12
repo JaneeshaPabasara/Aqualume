@@ -128,11 +128,12 @@ class WaterFragment : Fragment() {
         val data = Data.Builder()
             .putString("type", "water")
             .build()
-
+        //repeat hours
         val workRequest = PeriodicWorkRequestBuilder<ReminderWorker>(
             duration, TimeUnit.HOURS
         ).setInputData(data).build()
 
+        //rplace period
         WorkManager.getInstance(requireContext()).enqueueUniquePeriodicWork(
             "water_reminder",
             ExistingPeriodicWorkPolicy.REPLACE,

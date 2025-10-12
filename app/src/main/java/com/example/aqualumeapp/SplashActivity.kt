@@ -13,19 +13,19 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // Get Started button click
+
         val btnGetStarted = findViewById<Button>(R.id.btn_get_started)
         btnGetStarted.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
-        // Auto-navigate after 3 seconds if button not clicked
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (!isFinishing) {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        }, 3000)
+//        // Auto-navigate after 3 seconds if button not clicked
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            if (!isFinishing) {
+//                startActivity(Intent(this, MainActivity::class.java))
+//                finish()
+//            }
+//        }, 3000)
     }
 }

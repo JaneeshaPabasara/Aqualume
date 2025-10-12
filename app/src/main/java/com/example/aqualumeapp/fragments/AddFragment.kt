@@ -53,7 +53,7 @@ class AddFragment : Fragment() {
         }
 
         binding.cardMedicine.setOnClickListener {
-            // Navigate to medicine screen if needed
+
         }
     }
 
@@ -74,7 +74,7 @@ class AddFragment : Fragment() {
         // Get all tasks
         val allTasks = prefsManager.getAllTasks().toMutableList()
 
-        // Generate tasks from user settings
+        // Get current settings
         val settings = prefsManager.getUserSettings()
 
         // Remove old tasks and recreate them with updated values

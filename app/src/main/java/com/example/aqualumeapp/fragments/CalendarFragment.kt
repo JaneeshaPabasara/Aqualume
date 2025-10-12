@@ -80,7 +80,7 @@ class CalendarFragment : Fragment() {
             set(Calendar.SECOND, 59)
         }.timeInMillis
 
-        // Load water data
+        // load water data
         val waterLogs = prefsManager.getWaterLogs()
             .filter { it.timestamp in startOfDay..endOfDay }
         val totalWater = waterLogs.sumOf { it.amount }
@@ -207,7 +207,7 @@ class CalendarFragment : Fragment() {
             data = PieData(dataSet)
             description.isEnabled = false
             legend.isEnabled = false
-            setDrawEntryLabels(false)
+            setDrawEntryLabels(true)
             holeRadius = 70f
             transparentCircleRadius = 75f
             setHoleColor(Color.TRANSPARENT)
