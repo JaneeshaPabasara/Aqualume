@@ -239,8 +239,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/add_new_task"
-                    android:textSize="15sp"
-                    android:textColor="@color/primary_text" />
+                    android:textColor="@color/primary_text"
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="24dp"
