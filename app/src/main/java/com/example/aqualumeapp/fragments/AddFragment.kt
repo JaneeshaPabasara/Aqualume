@@ -55,6 +55,9 @@ class AddFragment : Fragment() {
         binding.cardMedicine.setOnClickListener {
 
         }
+        binding.btnAddTask.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_addTask)
+        }
     }
 
     private fun setupTaskRecyclerView() {

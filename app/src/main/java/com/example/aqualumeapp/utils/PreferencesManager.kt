@@ -18,6 +18,8 @@ class PreferencesManager(context: Context) {
         private const val KEY_MEDITATION_LOGS = "meditation_logs"
         private const val KEY_MOOD_LOGS = "mood_logs"
         private const val KEY_TASKS = "tasks"
+
+        private const val KEY_CUSTOM_TASKS = "custom_tasks"
         private const val KEY_MEDITATION_GOAL = "meditation_goal"
     }
 
@@ -164,5 +166,37 @@ class PreferencesManager(context: Context) {
 
     fun setMeditationGoal(goal: Int) {
         prefs.edit().putInt(KEY_MEDITATION_GOAL, goal).apply()
+    }
+
+
+    // Custom Tasks
+    fun getAllCustomTasks(): List<CustomTask> {
+        val json = prefs.getString(KEY_CUSTOM_TASKS, null) ?: return emptyList()
+        val type = object : TypeToken<List<CustomTask>>() {}.type
+        return gson.fromJson(json, type)
+    }
+
+    fun saveCustomTask(customTask: CustomTask) {
+        val tasks = getAllCustomTasks().toMutableList()
+        tasks.add(customTask)
+        val json = gson.toJson(tasks)
+        prefs.edit().putString(KEY_CUSTOM_TASKS, json).apply()
+    }
+
+    fun updateCustomTask(customTask: CustomTask) {
+        val tasks = getAllCustomTasks().toMutableList()
+        val index = tasks.indexOfFirst { it.id == customTask.id }
+        if (index != -1) {
+            tasks[index] = customTask
+            val json = gson.toJson(tasks)
+            prefs.edit().putString(KEY_CUSTOM_TASKS, json).apply()
+        }
+    }
+
+    fun deleteCustomTask(taskId: Long) {
+        val tasks = getAllCustomTasks().toMutableList()
+        tasks.removeAll { it.id == taskId }
+        val json = gson.toJson(tasks)
+        prefs.edit().putString(KEY_CUSTOM_TASKS, json).apply()
     }
 }

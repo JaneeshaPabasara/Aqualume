@@ -161,4 +161,15 @@
     <string name="_01_10_20255">01/10/2025</string>
     <string name="todayy">Today</string>
     <string name="add_new_task">Add new task</string>
+    <string name="add_new_taskk">Add new task</string>
+    <string name="task_illustration">Task illustration</string>
+    <string name="taskn">Task</string>
+    <string name="enter_task_name">Enter task name</string>
+    <string name="time_durationn">Time duration</string>
+    <string name="savet">Save</string>
+    <string name="customized_tasks">Customized tasks</string>
+    <string name="edit_task">Edit task</string>
+    <string name="delete_task">Delete task</string>
+    <string name="_6_30_ammm">6:30 AM</string>
+    <string name="need_to_read_a_book">Need to read a book</string>
 </resources>
